@@ -101,6 +101,47 @@ public class Lab2Help <T extends Comparable<T>>
         removeNode.next = null;
     }
 
+    public int searchByValue(T val) {
+        Node ptr = header;  // Pointer to traverse the list.
+        int count = 0;
+        String valString = val.toString();
+
+        while (ptr.data != null) {    // While not at the end of the list ...
+            count++;
+            T data = ptr.data;              // Get data of current node.
+            String dataString = data.toString(); // Convent data to string
+
+            if (dataString.equals(valString)) {
+                return count;
+            }
+
+            ptr = ptr.next;                 // Move to the next node.
+        }
+        return -1;
+
+//        return Integer.parseInt(String.valueOf(ptr));
+
+//        int count = 0;
+//        do {
+//            temp = temp.next;
+//            count++;
+//
+//            if (temp.data == val) {
+//                return count;
+//            }
+//            else {
+//                return -1;
+//            }
+//        }
+//        while (temp.data != val || temp.next != null);
+//        if (temp.data != val) {
+//            return count;
+//        }
+//        else {
+//            return -1;
+//        }
+    }
+
     public static void main(String[] args)
     {
         // Construct lists of Strings, Integers, and Boolean.
@@ -129,8 +170,9 @@ public class Lab2Help <T extends Comparable<T>>
 //        strList.insertIndex("I'm Last?", 2);
 //        strList.removeFirst();
 //        strList.removeLast();
-        strList.removeIndex(3);
-
+//        strList.removeIndex(3);
+//        System.out.println(intList.searchByValue(19));
+        
         // Display the list contents
 
         strList.display();
