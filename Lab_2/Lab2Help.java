@@ -65,7 +65,7 @@ public class Lab2Help <T extends Comparable<T>>
         temp.next = n;
 
     }
-    public void  insertIndex(T val, int inx)  {
+    public void insertIndex(T val, int inx)  {
         Node temp = header;
         for (int i = 1; i < inx; i++) {
             temp = temp.next;
@@ -118,28 +118,20 @@ public class Lab2Help <T extends Comparable<T>>
             ptr = ptr.next;                 // Move to the next node.
         }
         return -1;
+    }
 
-//        return Integer.parseInt(String.valueOf(ptr));
+    public int searchByIndex(int inx) {
+        Node ptr = header;
+        for (int i = 1; i < inx; i++) {
+            ptr = ptr.next;
+        }
+        return Integer.parseInt(ptr.data.toString());
+    }
 
-//        int count = 0;
-//        do {
-//            temp = temp.next;
-//            count++;
-//
-//            if (temp.data == val) {
-//                return count;
-//            }
-//            else {
-//                return -1;
-//            }
-//        }
-//        while (temp.data != val || temp.next != null);
-//        if (temp.data != val) {
-//            return count;
-//        }
-//        else {
-//            return -1;
-//        }
+    public boolean Update(T inx, T newVal) {
+        
+
+        return true;
     }
 
     public static void main(String[] args)
@@ -172,7 +164,8 @@ public class Lab2Help <T extends Comparable<T>>
 //        strList.removeLast();
 //        strList.removeIndex(3);
 //        System.out.println(intList.searchByValue(19));
-        
+//        System.out.println(intList.searchByIndex(2));
+
         // Display the list contents
 
         strList.display();
