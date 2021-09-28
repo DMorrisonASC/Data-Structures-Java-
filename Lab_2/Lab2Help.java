@@ -5,9 +5,6 @@
  *   This program uses a singly linked list without sentinel.
  *   Also note that this is a generic class.
  */
-
-
-
 public class Lab2Help <T extends Comparable<T>>
 {
     private Node header = null;  // Pointer to the head of the list.
@@ -149,7 +146,7 @@ public class Lab2Help <T extends Comparable<T>>
         Node ptr = header;
         String oldValString = oldVal.toString();
         int count = 0;
-        
+
         while (ptr !=  null) {
             String ptrDataString = ptr.data.toString();
             if (oldValString.equals(ptrDataString)) {
@@ -160,6 +157,19 @@ public class Lab2Help <T extends Comparable<T>>
             ptr = ptr.next;
         }
         return count;
+    }
+
+    public String StringToString () {
+        Node    ptr = header;  // Pointer to traverse the list.
+        StringBuilder listOfValues = new StringBuilder(new String());
+
+        while (ptr != null) {    // While not at the end of the list ...
+            T data = ptr.data;              // Get data of current node.
+            listOfValues.append(ptr.data.toString()).append("\n");
+            ptr = ptr.next;                 // Move to the next node.
+        }
+
+        return listOfValues.toString();
     }
 
 
@@ -196,7 +206,8 @@ public class Lab2Help <T extends Comparable<T>>
 //        System.out.println(strList.searchByValue("1) They'll let anyone in this list"));
 //        System.out.println(intList.searchByIndex(2));
 //        System.out.println(strList.Update(2, "Someone stole my sentence!"));
-        System.out.println(strList.UpdateAll("2) Move over I'm coming in", "Sorry, I didn't mean to take your spot!"));
+//        System.out.println(strList.UpdateAll("2) Move over I'm coming in", "Sorry, I didn't mean to take your spot!"));
+        System.out.println(strList.StringToString());
 
         // Display the list contents
 
@@ -212,9 +223,9 @@ public class Lab2Help <T extends Comparable<T>>
         // Determine the length of each list recursively.
 
         System.out.println("\nList lengths computed recursively\n");
-        System.out.println("strList number of nodes: "+ strList.lengthRecursive(strList.header));
-        System.out.println("intList number of nodes: "+ intList.lengthRecursive(intList.header));
-        System.out.println("boolList number of nodes: "+ boolList.lengthRecursive(boolList.header));
+//        System.out.println("strList number of nodes: "+ strList.lengthRecursive(strList.header));
+//        System.out.println("intList number of nodes: "+ intList.lengthRecursive(intList.header));
+//        System.out.println("boolList number of nodes: "+ boolList.lengthRecursive(boolList.header));
 
     }
 
