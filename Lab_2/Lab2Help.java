@@ -161,7 +161,7 @@ public class Lab2Help <T extends Comparable<T>>
 
     public String StringToString () {
         Node    ptr = header;  // Pointer to traverse the list.
-        StringBuilder listOfValues = new StringBuilder(new String());
+        StringBuilder listOfValues = new StringBuilder("");
 
         while (ptr != null) {    // While not at the end of the list ...
             T data = ptr.data;              // Get data of current node.
@@ -171,8 +171,6 @@ public class Lab2Help <T extends Comparable<T>>
 
         return listOfValues.toString();
     }
-
-
 
     public static void main(String[] args)
     {
@@ -198,6 +196,9 @@ public class Lab2Help <T extends Comparable<T>>
         for (int i = 20; i < 68; i++)
             intList.addToEnd(i);
 
+        boolList.addToFront(true);
+        boolList.addToFront(false);
+
 //        Testing more methods
 //        strList.insertIndex("I'm Last?", 2);
 //        strList.removeFirst();
@@ -207,7 +208,8 @@ public class Lab2Help <T extends Comparable<T>>
 //        System.out.println(intList.searchByIndex(2));
 //        System.out.println(strList.Update(2, "Someone stole my sentence!"));
 //        System.out.println(strList.UpdateAll("2) Move over I'm coming in", "Sorry, I didn't mean to take your spot!"));
-        System.out.println(strList.StringToString());
+//        System.out.println(strList.StringToString());
+          boolList.StringToString();
 
         // Display the list contents
 
