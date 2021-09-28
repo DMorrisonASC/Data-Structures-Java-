@@ -25,17 +25,17 @@ public class Lab2Help <T extends Comparable<T>>
     }
 
     public void addToEnd(T item){
-      Node n = new Node();
-      n.data = item;
-      n.next = null;
+      Node n = new Node();      // Construct a new node - ptr points to it.
+      n.data = item;            // New node's data is the parameter item.
+      n.next = null;            // it points to null because it's added to the end of the list
 
-      Node temp = header;
+      Node temp = header;       // temp prevents data from being lost by acting as a placeholder for header
 
-      while(temp.next != null){
+      while(temp.next != null){ // Keep looking for end of the list
         temp = temp.next;
 
       }
-      temp.next = n;
+      temp.next = n;            // set new node of "n" to the end of the list
 
     }
 
@@ -49,17 +49,14 @@ public class Lab2Help <T extends Comparable<T>>
     }
 
     public void  insertLast(T val)  {
-        Node n = new Node();
-        n.data = val;
-        n.next = null;
-
         Node temp = header;
 
         while(temp.next != null){
             temp = temp.next;
 
         }
-        temp.next = n;
+        temp.data =  val;
+        temp.next = null;
 
     }
     public void insertIndex(T val, int inx)  {
@@ -103,12 +100,12 @@ public class Lab2Help <T extends Comparable<T>>
         int count = 0;
         String valString = val.toString();
 
-        while (ptr.data != null) {    // While not at the end of the list ...
+        while (ptr.next != null) {    // While not at the end of the list ...
             count++;
             T data = ptr.data;              // Get data of current node.
             String dataString = data.toString(); // Convent data to string
 
-            if (dataString.equals(valString)) {
+            if (dataString.equals(valString)) {  // If it finds the node, return its index(count)
                 return count;
             }
 
@@ -118,45 +115,43 @@ public class Lab2Help <T extends Comparable<T>>
     }
 
     public int searchByIndex(int inx) {
-        Node ptr = header;
-        for (int i = 1; i < inx; i++) {
+        Node ptr = header;              // Pointer to traverse the list.
+        for (int i = 1; i < inx; i++) { // Runs until it reaches the inputted index & traverses the list
             ptr = ptr.next;
         }
         return Integer.parseInt(ptr.data.toString());
     }
 
     public boolean Update(int inx, T newVal) {
-        Node ptr = header;
-        String inxString = Integer.toString(inx);
-        int index = Integer.parseInt(inxString);
-        for (int i = 1; i < index; i++) {
+        Node ptr = header; // Pointer to traverse the list.
+
+        for (int i = 1; i < inx; i++) { // Traverse list x amount of times until it finds the index of the item
             ptr = ptr.next;
         }
 
-        if (ptr != null) {
+        if (ptr != null) { // If there is an item present, update it
             ptr.data = newVal;
             return true;
         }
-        else {
+        else { // Else return false
             return false;
         }
     }
 
     public int UpdateAll (T oldVal, T newVal) {
-        Node ptr = header;
-        String oldValString = oldVal.toString();
-        int count = 0;
+        Node ptr = header; // Pointer to traverse the list.
+        String oldValString = oldVal.toString(); // Get string of old value
+        int count = 0; // counter for how many times an item is present
 
-        while (ptr !=  null) {
-            String ptrDataString = ptr.data.toString();
-            if (oldValString.equals(ptrDataString)) {
+        while (ptr !=  null) { // Traverse the whole list
+            String ptrDataString = ptr.data.toString(); // convert value of current node to a string
+            if (oldValString.equals(ptrDataString)) { // Compare them and if they are the same. Replace old value with new one
                 ptr.data = newVal;
-                count++;
+                count++; // Increase count by 1
             }
-
-            ptr = ptr.next;
+            ptr = ptr.next; // move to next node
         }
-        return count;
+        return count; // return the frequency that old value appeared
     }
 
     public String StringToString () {
@@ -165,7 +160,7 @@ public class Lab2Help <T extends Comparable<T>>
 
         while (ptr != null) {    // While not at the end of the list ...
             T data = ptr.data;              // Get data of current node.
-            listOfValues.append(ptr.data.toString()).append("\n");
+            listOfValues.append(ptr.data.toString()).append("\n"); // Append new strings  + a newline to the list
             ptr = ptr.next;                 // Move to the next node.
         }
 
@@ -200,16 +195,16 @@ public class Lab2Help <T extends Comparable<T>>
         boolList.addToFront(false);
 
 //        Testing more methods
-//        strList.insertIndex("I'm Last?", 2);
-//        strList.removeFirst();
-//        strList.removeLast();
-//        strList.removeIndex(3);
-//        System.out.println(strList.searchByValue("1) They'll let anyone in this list"));
-//        System.out.println(intList.searchByIndex(2));
-//        System.out.println(strList.Update(2, "Someone stole my sentence!"));
-//        System.out.println(strList.UpdateAll("2) Move over I'm coming in", "Sorry, I didn't mean to take your spot!"));
-//        System.out.println(strList.StringToString());
-          boolList.StringToString();
+        strList.insertIndex("I'm Last?", 2);
+        strList.removeFirst();
+        strList.removeLast();
+        strList.removeIndex(3);
+        System.out.println(intList.searchByValue(20));
+        System.out.println(intList.searchByIndex(2));
+        System.out.println(strList.Update(2, "Someone stole my sentence!"));
+        System.out.println(strList.UpdateAll("2) Move over I'm coming in", "Sorry, I didn't mean to take your spot!"));
+        System.out.println(strList.StringToString());
+        boolList.StringToString();
 
         // Display the list contents
 
@@ -217,17 +212,17 @@ public class Lab2Help <T extends Comparable<T>>
         intList.display();
         boolList.display();
         // Determine the length of each list iteratively.
-//        System.out.println("\nList lengths computed iteratively\n");
-//        System.out.println("strList number of nodes: "+ strList.lengthIterative());
-//        System.out.println("intListnumber of nodes: "+ intList.lengthIterative());
-//        System.out.println("boolListnumber of nodes: "+ boolList.lengthIterative());
+        System.out.println("\nList lengths computed iteratively\n");
+        System.out.println("strList number of nodes: "+ strList.lengthIterative());
+        System.out.println("intListnumber of nodes: "+ intList.lengthIterative());
+        System.out.println("boolListnumber of nodes: "+ boolList.lengthIterative());
 
         // Determine the length of each list recursively.
 
         System.out.println("\nList lengths computed recursively\n");
-//        System.out.println("strList number of nodes: "+ strList.lengthRecursive(strList.header));
-//        System.out.println("intList number of nodes: "+ intList.lengthRecursive(intList.header));
-//        System.out.println("boolList number of nodes: "+ boolList.lengthRecursive(boolList.header));
+        System.out.println("strList number of nodes: "+ strList.lengthRecursive(strList.header));
+        System.out.println("intList number of nodes: "+ intList.lengthRecursive(intList.header));
+        System.out.println("boolList number of nodes: "+ boolList.lengthRecursive(boolList.header));
 
     }
 
@@ -288,7 +283,6 @@ public class Lab2Help <T extends Comparable<T>>
 
         System.out.println("");
     }
-
 
     /*
      *    Inner Class - Node objects for a singly linked list.
