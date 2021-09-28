@@ -117,7 +117,7 @@ public class Lab2Help <T extends Comparable<T>>
 
             ptr = ptr.next;                 // Move to the next node.
         }
-        return -1;
+        return -1; // Return -1 if it is not found.
     }
 
     public int searchByIndex(int inx) {
@@ -128,11 +128,41 @@ public class Lab2Help <T extends Comparable<T>>
         return Integer.parseInt(ptr.data.toString());
     }
 
-    public boolean Update(T inx, T newVal) {
-        
+    public boolean Update(int inx, T newVal) {
+        Node ptr = header;
+        String inxString = Integer.toString(inx);
+        int index = Integer.parseInt(inxString);
+        for (int i = 1; i < index; i++) {
+            ptr = ptr.next;
+        }
 
-        return true;
+        if (ptr != null) {
+            ptr.data = newVal;
+            return true;
+        }
+        else {
+            return false;
+        }
     }
+
+    public int UpdateAll (T oldVal, T newVal) {
+        Node ptr = header;
+        String oldValString = oldVal.toString();
+        int count = 0;
+        
+        while (ptr !=  null) {
+            String ptrDataString = ptr.data.toString();
+            if (oldValString.equals(ptrDataString)) {
+                ptr.data = newVal;
+                count++;
+            }
+
+            ptr = ptr.next;
+        }
+        return count;
+    }
+
+
 
     public static void main(String[] args)
     {
@@ -163,8 +193,10 @@ public class Lab2Help <T extends Comparable<T>>
 //        strList.removeFirst();
 //        strList.removeLast();
 //        strList.removeIndex(3);
-//        System.out.println(intList.searchByValue(19));
+//        System.out.println(strList.searchByValue("1) They'll let anyone in this list"));
 //        System.out.println(intList.searchByIndex(2));
+//        System.out.println(strList.Update(2, "Someone stole my sentence!"));
+        System.out.println(strList.UpdateAll("2) Move over I'm coming in", "Sorry, I didn't mean to take your spot!"));
 
         // Display the list contents
 
@@ -189,9 +221,6 @@ public class Lab2Help <T extends Comparable<T>>
     /*
      *   Enter a data item at the front of the list.
      */
-
-
-
 
     /*
      *    lengthIterative()
