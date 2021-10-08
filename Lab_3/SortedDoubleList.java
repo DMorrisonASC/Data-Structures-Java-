@@ -44,14 +44,6 @@ public class SortedDoubleList<T> {
         return tail.previous.node_value;
     }
 
-    public void checkLinkedList() {
-        DoubleNode traverse = head.next;
-        while (traverse.node_value != null) {
-            System.out.println(traverse.node_value);
-            traverse = traverse.next;
-        }
-    }
-
     public int count(T obj) {
         DoubleNode traverse = head;
         int counter = 0;
@@ -87,7 +79,8 @@ public class SortedDoubleList<T> {
 
                     traverse.next.previous = put_value;
                     traverse.next = put_value;
-                    break;
+                    addSizeByOne();
+                    return;
                 }
             }
 
@@ -96,29 +89,8 @@ public class SortedDoubleList<T> {
 
             traverse.previous = put_value;
             head.next = put_value;
+            addSizeByOne();
         }
-//        DoubleNode val = new DoubleNode(obj);
-//        DoubleNode temp = head.next;
-//
-//        if(empty()) {
-//            val.next = tail;
-//            val.previous = head;
-//            head.next = val;
-//            tail.previous = val;
-//            size++;
-//        }
-//
-//        while (temp != tail) {
-//            if (compareTo(temp.node_value, val.node_value) > 0) {
-//                val.next = temp;
-//                val.previous = temp.previous;
-//                temp.previous.next = val;
-//                temp.previous = val;
-//                size++;
-//                break;
-//            }
-//            temp = temp.next;
-//        }
     }
 
     public T pop_front() {
@@ -153,6 +125,38 @@ public class SortedDoubleList<T> {
             return frontDouble.node_value;
         }
     }
+    public int erase(T obj) {
+        int nodesRemoved = 0;
+        if (empty()) {
+            return nodesRemoved;
+        }
+        else {
+            DoubleNode traverse = tail;
+            while (traverse.previous != head) {
+                traverse = traverse.previous;
+                if (compareTo(obj, traverse.node_value) == 0) {
+                    DoubleNode eraseThisNode = traverse;
+                    traverse = traverse.next;
+                    eraseThisNode.previous.next = eraseThisNode.next;
+                    eraseThisNode.next.previous = eraseThisNode.previous;
+
+                    eraseThisNode.next = null;
+                    eraseThisNode.previous = null;
+                    nodesRemoved++;
+                }
+            }
+            return nodesRemoved;
+        }
+    }
+
+//    Print all the values of the double nodes
+    public void checkLinkedList() {
+        DoubleNode traverse = head.next;
+        while (traverse.node_value != null) {
+            System.out.println(traverse.node_value);
+            traverse = traverse.next;
+        }
+    }
 
     public class DoubleNode {
         T node_value;
@@ -164,7 +168,6 @@ public class SortedDoubleList<T> {
             previous = null;
             next = null;
         }
-
         public T value() {
             return node_value;
         }
@@ -172,19 +175,28 @@ public class SortedDoubleList<T> {
 
     public static void main(String[] args) {
 //        SortedDoubleList <String> temp = new SortedDoubleList <String> ();
-//        temp.test("Hello");
         SortedDoubleList<Integer> intLinkedList = new SortedDoubleList<Integer>();
-        intLinkedList.insert(5);
-        intLinkedList.insert(4);
+
+        intLinkedList.insert(55);
+        intLinkedList.insert(102);
         intLinkedList.insert(8);
         intLinkedList.insert(2);
         intLinkedList.insert(99);
         intLinkedList.insert(1);
+        intLinkedList.insert(1);
+        intLinkedList.insert(20);
 
+        System.out.println(intLinkedList.size());
+        System.out.println(intLinkedList.empty());
+        System.out.println(intLinkedList.count(1));
 
-//        System.out.println(intLinkedList.size());
-//        System.out.println(intLinkedList.empty());
-//        System.out.println(intLinkedList.count(1));
+        System.out.println();
+        System.out.println(intLinkedList.erase(1));
+//        System.out.println(intLinkedList.pop_front());
+//        System.out.println(intLinkedList.pop_front());
+//        System.out.println(intLinkedList.pop_back());
+//        System.out.println(intLinkedList.pop_back());
+        System.out.println();
         intLinkedList.checkLinkedList();
     }
 
