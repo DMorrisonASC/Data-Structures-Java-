@@ -8,7 +8,7 @@ public class SortedDoubleList<T> {
     private DoubleNode head;
     private DoubleNode tail;
     private int size;
-
+//    Constructor for SortedDoubleList class
     public SortedDoubleList() {
         head = new DoubleNode(null);
         tail = new DoubleNode(null);
@@ -17,33 +17,36 @@ public class SortedDoubleList<T> {
         tail.previous = head;
         size = 0;
     }
-
+//      "Getter" function for size
     public int size() {
         return this.size;
     }
+//        Increases size by 1
     public void addSizeByOne() { size++; }
-
+//        Decreases size by 1
+    public void subtractSizeByOne() { size--; }
+//        Checks if list is empty. Its empty when head and tail are pointing to each other.
     public boolean empty() {
         if (head.next == tail) {
             return true;
         }
         return false;
     }
-
+//        Retrieves the object stored in the node pointed to by the head pointer. This function returns null if the list is empty. (O(1))
     public T front() {
         if (empty()) {
             return null;
         }
         return head.next.node_value;
     }
-
+//        Retrieves the object stored in the node pointed to by the tail pointer. This function returns null if the list is empty. (O(1))
     public T back() {
         if (empty()) {
             return null;
         }
         return tail.previous.node_value;
     }
-
+//        Returns the number of nodes in the linked list storing a value equal to the argument. (O(n))
     public int count(T obj) {
         DoubleNode traverse = head;
         int counter = 0;
@@ -57,9 +60,19 @@ public class SortedDoubleList<T> {
         }
         return counter;
     }
-
+/*
+Creates a new DoubleNode<Type> storing the argument,
+placing it into the correct location in the linked list such
+that the element in the previous node (if any) is less than or
+equal to the element stored in the current node, and that element
+is less than or equal to the element stored in the next node.
+The head and tail pointers may have to be updated if
+the new node is placed at the head or tail of the linked list. (O(n))
+ */
     public void insert(T obj) {
+//        Create a node that has a value of `obj`
         DoubleNode put_value = new DoubleNode(obj);
+//         IF list is empty, put a value between head and tail.
         if (empty()) {
             put_value.next = tail;
             put_value.previous = head;
@@ -69,8 +82,18 @@ public class SortedDoubleList<T> {
 
             addSizeByOne();
         }
+/*
+        ELSE Creates a new DoubleNode<Type> storing the argument, placing it into the correct
+        location in the linked list such that the element in the previous node
+        is less than or equal to the element stored in the current node,
+        and that element is less than or equal to the element stored in the next node;
+        Sort the nodes in the list from least to greatest(left to right).
+*/
         else {
+//            Start at the tail
             DoubleNode traverse = tail;
+//            Keep moving through the list from right to left, until it finds a node value that is less than obj
+//            then end function by returning
             while (traverse.previous != head) {
                 traverse = traverse.previous;
                 if (compareTo(obj, traverse.node_value) == 1) {
@@ -83,7 +106,8 @@ public class SortedDoubleList<T> {
                     return;
                 }
             }
-
+//            If there is none, the node(`obj`) is placed at the end because it's the smallest value. Also, increase
+//            size by one.
             put_value.previous = head;
             put_value.next = traverse;
 
@@ -92,7 +116,11 @@ public class SortedDoubleList<T> {
             addSizeByOne();
         }
     }
-
+/*
+* Delete the node at the front of the linked list and,
+* as necessary, update the head and tail pointers and the previous pointer of any other node within the list. Return the
+* object stored in the node being popped. Return null if the list is empty. (O(1))
+* */
     public T pop_front() {
         if (empty()) {
             return null;
@@ -105,11 +133,13 @@ public class SortedDoubleList<T> {
 
             frontDouble.next = null;
             frontDouble.previous = null;
-
+            subtractSizeByOne();
             return frontDouble.node_value;
         }
     }
-
+/*
+* Similar to pop_front, delete the last node in the list. This function returns null if the list is empty. (O(1))
+* */
     public T pop_back() {
         if (empty()) {
             return null;
@@ -121,10 +151,15 @@ public class SortedDoubleList<T> {
 
             frontDouble.next = null;
             frontDouble.previous = null;
-
+            subtractSizeByOne();
             return frontDouble.node_value;
         }
     }
+/*
+* Delete the all nodes in the linked list that contains the object equal to the argument.
+* As necessary, update the head and tail pointers and the previous and next pointers of any other node within the list.
+* Return the number of nodes that were deleted. (O(n))
+* */
     public int erase(T obj) {
         int nodesRemoved = 0;
         if (empty()) {
@@ -142,6 +177,7 @@ public class SortedDoubleList<T> {
 
                     eraseThisNode.next = null;
                     eraseThisNode.previous = null;
+                    subtractSizeByOne();
                     nodesRemoved++;
                 }
             }
@@ -157,7 +193,11 @@ public class SortedDoubleList<T> {
             traverse = traverse.next;
         }
     }
-
+/*
+* Also, implement the inner class DoubleNode.
+A doubly linked node contains three member variables: a value and two pointers, each of which points to another
+*  doubly linked node.
+* */
     public class DoubleNode {
         T node_value;
         DoubleNode previous;
@@ -199,7 +239,10 @@ public class SortedDoubleList<T> {
         System.out.println();
         intLinkedList.checkLinkedList();
     }
-
+/*
+* Compares generic values. Compare assumes that if `temp1Int` is a int or string, `temp2` is the same type. Example,
+* it compares int vs int & string vs string, and not int vs string.
+* */
     public int compareTo(T a, T b) {
         String temp1 = a.toString();
         String temp2 = b.toString();
@@ -225,17 +268,3 @@ public class SortedDoubleList<T> {
             }
         }
 }
-
-
-/*
-    public void test(T w){
-        //Example of how to use the method compareTo
-        // Important! This method does NOT do anything right now because the list is empty
-        // This is an example of how you could use your method CompareTo if there is at least one node inserted.
-        DoubleNode toInsert = new DoubleNode(w);
-        DoubleNode traverse = head;
-        int answer = compareTo(traverse.value(),toInsert.value());
-        //Answer has the numberical value of comparing the 2 nodes
-        System.out.println(answer);
-    }
-*/
