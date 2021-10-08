@@ -22,6 +22,7 @@ Read that information (make sure that the user picks a valid option) and then di
 
         String input;
         Scanner one = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
 //        input = one.nextLine();
 //        String val2 = test2(input);
 
@@ -36,7 +37,7 @@ Read that information (make sure that the user picks a valid option) and then di
                     6.\tCount elements with a particular value
                     7.\tRemove first
                     8.\tRemove last
-                    9.\tRemove all elements with a particular value9
+                    9.\tRemove all elements with a particular value
                     10.\tOutput all node values
                     -1.\tExit the program.
                     """);
@@ -45,37 +46,39 @@ Read that information (make sure that the user picks a valid option) and then di
             if (val2 == 1) {
                 switch (input) {
                     case "1":
-                        IntergerList.insert(Integer.parseInt(input));
+                        System.out.println("Put a number: ");
+                        int put_Int = scan.nextInt();
+                        IntergerList.insert(put_Int);
+                        scan.nextLine();
                         break;
                     case "2":
                         System.out.println("List size: " + IntergerList.size());
                         break;
                     case "3":
-                        System.out.println(IntergerList.empty());
+                        System.out.println("The list size is: " + IntergerList.empty());
                         break;
                     case "4":
-                        System.out.println(IntergerList.front());
+                        System.out.println("The value of " + IntergerList.front() + " is at the front");
                         break;
                     case "5":
-                        System.out.println(IntergerList.back());
+                        System.out.println("The value of " + IntergerList.back() + " is at the back");
                         break;
                     case "6":
-                        System.out.println(IntergerList.count(Integer.parseInt(input)));
+                        System.out.println("Put a number: ");
+                        int put_Int2 = scan.nextInt();
+                        System.out.println(IntergerList.count(put_Int2));
+                        scan.nextLine();
                         break;
                     case "7":
                         IntergerList.pop_front();
                         break;
                     case "8":
-//                        int eraseThisInput;
-//                        Scanner scan = new Scanner(System.in);
-//                        eraseThisInput = scan.nextInt();
                         IntergerList.pop_back();
                         break;
                     case "9":
-//                        int eraseThisInput;
-//                        Scanner scan = new Scanner(System.in);
-//                        eraseThisInput = scan.nextInt();
-                        IntergerList.erase(Integer.parseInt(input));
+                        System.out.println("Put a number: ");
+                        int put_Int3 = scan.nextInt();
+                        IntergerList.erase(put_Int3);
                         break;
                     case "10":
                         IntergerList.checkLinkedList();
