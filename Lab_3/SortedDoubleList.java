@@ -78,59 +78,47 @@ public class SortedDoubleList<T> {
             addSizeByOne();
         }
         else {
-            DoubleNode traverse = tail.previous;
-            boolean keepGoing = true;
-            while (keepGoing) {
-//            Check if `obj` equals the `node_value` of current doubleNode
-                if (compareTo(obj, traverse.node_value) == 1 ) {
+            DoubleNode traverse = tail;
+            while (traverse.previous != head) {
+                traverse = traverse.previous;
+                if (compareTo(obj, traverse.node_value) == 1) {
                     put_value.previous = traverse;
                     put_value.next = traverse.next;
 
                     traverse.next.previous = put_value;
                     traverse.next = put_value;
-                    addSizeByOne();
-                    keepGoing = false;
-                }
-                else if (compareTo(obj, traverse.node_value) == 0 ) {
-                    put_value.previous = traverse;
-                    put_value.next = traverse.next;
-
-                    traverse.next.previous = put_value;
-                    traverse.next = put_value;
-                    addSizeByOne();
-                    keepGoing = false;
-                }
-                else if (compareTo(obj, traverse.node_value) == -1 ) {
-                      if (traverse.previous == head ) {
-                        put_value.previous = head;
-                        put_value.next = traverse;
-
-                        traverse.previous = put_value;
-                        head.next = put_value;
-                        addSizeByOne();
-                        keepGoing = false;
-                      }
-                      else if (compareTo(obj, traverse.previous.node_value) == -1 ) {
-                        put_value.previous = traverse.previous.previous;
-                        put_value.next = traverse.previous;
-
-                        traverse.previous.next = put_value;
-                        put_value.previous.previous = put_value;
-                        addSizeByOne();
-                        keepGoing = false;
-                      }
-                      else {
-                        put_value.previous = traverse.previous;
-                        put_value.next = traverse;
-
-                        traverse.previous.next = put_value;
-                        traverse.previous = put_value;
-                        addSizeByOne();
-                        keepGoing = false;
-                      }
+                    break;
                 }
             }
+
+            put_value.previous = head;
+            put_value.next = traverse;
+
+            traverse.previous = put_value;
+            head.next = put_value;
         }
+//        DoubleNode val = new DoubleNode(obj);
+//        DoubleNode temp = head.next;
+//
+//        if(empty()) {
+//            val.next = tail;
+//            val.previous = head;
+//            head.next = val;
+//            tail.previous = val;
+//            size++;
+//        }
+//
+//        while (temp != tail) {
+//            if (compareTo(temp.node_value, val.node_value) > 0) {
+//                val.next = temp;
+//                val.previous = temp.previous;
+//                temp.previous.next = val;
+//                temp.previous = val;
+//                size++;
+//                break;
+//            }
+//            temp = temp.next;
+//        }
     }
 
     public T pop_front() {
@@ -171,12 +159,6 @@ public class SortedDoubleList<T> {
         DoubleNode previous;
         DoubleNode next;
 
-//        public DoubleNode() {
-//            node_value = "0";
-//            previous = null;
-//            next = null;
-//        }
-
         public DoubleNode(T obj) {
             node_value = obj;
             previous = null;
@@ -192,12 +174,12 @@ public class SortedDoubleList<T> {
 //        SortedDoubleList <String> temp = new SortedDoubleList <String> ();
 //        temp.test("Hello");
         SortedDoubleList<Integer> intLinkedList = new SortedDoubleList<Integer>();
+        intLinkedList.insert(5);
         intLinkedList.insert(4);
+        intLinkedList.insert(8);
+        intLinkedList.insert(2);
+        intLinkedList.insert(99);
         intLinkedList.insert(1);
-        intLinkedList.insert(2);
-        intLinkedList.insert(2);
-        intLinkedList.insert(2);
-//        intLinkedList.insert(1);
 
 
 //        System.out.println(intLinkedList.size());
