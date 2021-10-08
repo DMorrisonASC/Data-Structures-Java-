@@ -45,36 +45,37 @@ Read that information (make sure that the user picks a valid option) and then di
             if (val2 == 1) {
                 switch (input) {
                     case "1":
+                        IntergerList.insert(Integer.parseInt(input));
                         break;
                     case "2":
-                        System.out.println("Print list size");
-                        System.out.println(IntergerList.size());
+                        System.out.println("List size: " + IntergerList.size());
                         break;
                     case "3":
-                        System.out.println("Is the list empty?");
+                        System.out.println(IntergerList.empty());
                         break;
                     case "4":
-                        System.out.println("Print first element");
+                        System.out.println(IntergerList.front());
                         break;
                     case "5":
-                        System.out.println("5");
+                        System.out.println(IntergerList.back());
                         break;
                     case "6":
-                        System.out.println("6");
+                        System.out.println(IntergerList.count(Integer.parseInt(input)));
                         break;
                     case "7":
-                        System.out.println("7");
+                        IntergerList.pop_front();
                         break;
                     case "8":
 //                        int eraseThisInput;
 //                        Scanner scan = new Scanner(System.in);
 //                        eraseThisInput = scan.nextInt();
+                        IntergerList.pop_back();
                         break;
                     case "9":
 //                        int eraseThisInput;
 //                        Scanner scan = new Scanner(System.in);
 //                        eraseThisInput = scan.nextInt();
-                        IntergerList.erase(input);
+                        IntergerList.erase(Integer.parseInt(input));
                         break;
                     case "10":
                         IntergerList.checkLinkedList();
