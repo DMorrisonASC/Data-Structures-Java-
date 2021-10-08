@@ -101,7 +101,16 @@ public class SortedDoubleList<T> {
                     keepGoing = false;
                 }
                 else if (compareTo(obj, traverse.node_value) == -1 ) {
-                      if (compareTo(obj, traverse.previous.node_value) == -1 ) {
+                      if (traverse.previous == head ) {
+                        put_value.previous = head;
+                        put_value.next = traverse;
+
+                        traverse.previous = put_value;
+                        head.next = put_value;
+                        addSizeByOne();
+                        keepGoing = false;
+                      }
+                      else if (compareTo(obj, traverse.previous.node_value) == -1 ) {
                         put_value.previous = traverse.previous.previous;
                         put_value.next = traverse.previous;
 
@@ -163,10 +172,11 @@ public class SortedDoubleList<T> {
         DoubleNode next;
 
 //        public DoubleNode() {
-//            node_value = null;
+//            node_value = "0";
 //            previous = null;
 //            next = null;
 //        }
+
         public DoubleNode(T obj) {
             node_value = obj;
             previous = null;
