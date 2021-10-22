@@ -1,0 +1,101 @@
+/*
+    Author: Daeshaun Morrison, Muhlenberg College class of 2024(daeshaunkmorrison@gmail.com)
+    Date: 10/21/2021
+    Instructor: Professor Silvergra
+    Description:
+ */
+
+public class MyQueue {
+    public int[] queue;
+    private int size;
+    private int front;
+    private int rear;
+
+    public int getSize() {
+        return size;
+    }
+
+    public MyQueue(int size) {
+        this.size = size;
+        front = -1;
+        rear = -1;
+        this.queue = new int[size];
+    }
+
+    public void enqueue(int value) {
+
+        if (isEmpty()) {
+            front++;
+            rear++;
+            queue[rear] = value;
+        }
+
+        else {
+            if (isFull()) {
+                System.out.println("It's full, dequeue first!");
+            } else {
+                if (rear == (getSize() - 1)) {
+                   rear = 0;
+                }
+                else {
+                    rear++;
+                }
+                queue[rear] = value;
+            }
+        }
+    }
+
+    public int dequeue() {
+        if (isEmpty()) {
+            System.out.println("It's empty, insert first!");
+        }
+        else {
+            queue[front] = 0;
+            front++;
+        }
+        return 1;
+    }
+
+    public boolean isEmpty() {
+        if (front == -1) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isFull() {
+//        if (rear == (getSize() - 1) && front == 0) {
+//            return true;
+//        }
+//        else if (rear == front - 1) {
+//            return true;
+//        }
+        if ((rear+1) % getSize() == front ) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public void outPut() {
+        for (int i = 0; i < queue.length; i++) {
+            System.out.println(queue[i]);
+        }
+    }
+
+    public static void main(String[] args) {
+//        Scanner scan = new Scanner(System.in);
+        MyQueue intQueue = new MyQueue(4);
+        intQueue.dequeue();
+        intQueue.enqueue(2);
+        intQueue.enqueue(4);
+        intQueue.enqueue(5);
+        intQueue.enqueue(9);
+        intQueue.dequeue();
+        intQueue.dequeue();
+        intQueue.enqueue(1);
+        intQueue.enqueue(3);
+        intQueue.outPut();
+    }
+}
