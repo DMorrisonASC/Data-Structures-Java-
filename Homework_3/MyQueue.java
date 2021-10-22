@@ -2,7 +2,7 @@
     Author: Daeshaun Morrison, Muhlenberg College class of 2024(daeshaunkmorrison@gmail.com)
     Date: 10/21/2021
     Instructor: Professor Silvergra
-    Description:
+    Description: Implement a circular queue
  */
 public class MyQueue {
     private int[] queue;
@@ -55,9 +55,9 @@ public class MyQueue {
     }
     /*
     * Dequeue elements in a list. Basic case: Array is empty, print error statement.
-    * Case 2:  Check if front is about to pass rear and print error messagae. Case 3) Else, check if `front` is at end of the list. 
+    * Case 2:  Check if front is about to pass rear and print error messagae. Case 3) Else, check if `front` is at end of the list.
     * If it is, reset it to the start of the array
-    * by setting `front` to zero. 
+    * by setting `front` to zero.
     * Case 3) increase front by 1;
     * */
     public int dequeue() {
