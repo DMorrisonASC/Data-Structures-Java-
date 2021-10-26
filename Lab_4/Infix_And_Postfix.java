@@ -1,28 +1,25 @@
+public class Infix_And_Postfix<T> implements StackInterface<T> {
+    T expression;
+    T a;
+    T b;
+    T c;
 
-public class Infix_And_Postfix implements StackInterface {
-    String expression;
-    String a;
-    String b;
-    String c;
-
-    public Infix_And_Postfix(String expression) {
-        this.expression = expression;
+    public Infix_And_Postfix(T expression) {
+//        this.expression = expression;
     }
 
+    public void push(T number) {
+
+    }
     public void push(String number) {
-        System.out.println("Up");
     }
 
-    public void push( number) {
-        
+    public T pop() {
+        return null;
     }
 
-    public String pop() {
-        return "Yes";
-    }
-
-    public String peek() {
-        return "Yes";
+    public T peek() {
+        return null;
     }
 
     public boolean isEmpty() {
@@ -35,7 +32,7 @@ public class Infix_And_Postfix implements StackInterface {
     }
 
     public static void main(String[] args) {
-        Infix_And_Postfix userExpression = new Infix_And_Postfix("12+");
+//        Infix_And_Postfix userExpression = new Infix_And_Postfix("12+")
 
     }
 }
