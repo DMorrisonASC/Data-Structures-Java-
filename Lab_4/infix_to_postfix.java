@@ -6,17 +6,76 @@ public class infix_to_postfix {
     }
 
     public String conversion (String val) {
-        String output = "";
+//        String output = "";
+//        StringBuilder expression = new StringBuilder();
+//        for (char letterChar: val.toCharArray()) {
+//            String letter = Character.toString(letterChar);
+//            operationsStack.push(letter);
+//        }
+//        while (operationsStack.isEmpty() == false) {
+//            expression.append(operationsStack.pop());
+//        }
+//        output = expression.toString();
+//        return output;
+        String finalOutput = "";
+
         StringBuilder expression = new StringBuilder();
+
         for (char letterChar: val.toCharArray()) {
-            String letter = Character.toString(letterChar);
-            operationsStack.push(letter);
+            String currentRule = Character.toString(letterChar);
+            if ( currentRule.matches("-?(0|[1-9]\\d*)") ) {
+                expression.append(currentRule);
+            }
+            else {
+//                1st case
+                if (currentRule.equals("(")) {
+                    operationsStack.push(currentRule);
+                }
+                else if (currentRule.equals(")")) {
+                    while (!operationsStack.peek().equals("(")) {
+                        expression.append(operationsStack.pop());
+                    }
+                    operationsStack.pop();
+                }
+
+                else if (currentRule.equals("*") || currentRule.equals("/")) {
+                    if (operationsStack.peek().equals("+") || operationsStack.peek().equals("-"))  {
+                        operationsStack.push(currentRule);
+                    }
+
+                    else if (operationsStack.peek().equals("*") || operationsStack.peek().equals("/")) {
+                        expression.append(operationsStack.pop());
+                        operationsStack.push(currentRule);
+                    }
+
+                    else {
+                        operationsStack.push(currentRule);
+                    }
+                }
+
+                else if (currentRule.equals("+") || currentRule.equals("-")) {
+                    if (operationsStack.peek() == null) {
+                        operationsStack.push(currentRule);
+                    }
+                    else if (operationsStack.peek().equals("*") || operationsStack.peek().equals("/") || operationsStack.peek().equals("+") || operationsStack.peek().equals("-")) {
+                        expression.append(operationsStack.pop());
+                        operationsStack.push(currentRule);
+                    }
+
+                    else {
+                        operationsStack.push(currentRule);
+                    }
+                }
+
+            }
+
         }
         while (operationsStack.isEmpty() == false) {
             expression.append(operationsStack.pop());
         }
-        output = expression.toString();
-//        operationsStack.printOutPut();
-        return output;
+
+       finalOutput = expression.toString();
+        return finalOutput;
     }
+
 }
