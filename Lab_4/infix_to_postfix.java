@@ -34,18 +34,17 @@ public class infix_to_postfix {
                     if (operationsStack.peek() == null) {
                         operationsStack.push(currentRule);
                     }
+                    else if (operationsStack.peek().equals("*") || operationsStack.peek().equals("/")) {
+                        while (!operationsStack.isEmpty() && !operationsStack.peek().equals("(")) {
+                            expression.append(operationsStack.pop());
+                        }
+                        operationsStack.push(currentRule);
+                    }
+
                     else if (operationsStack.peek().equals("+") || operationsStack.peek().equals("-"))  {
                         operationsStack.push(currentRule);
                     }
-
-                    else if (operationsStack.peek().equals("*") || operationsStack.peek().equals("/")) {
-                        expression.append(operationsStack.pop());
-                        operationsStack.push(currentRule);
-                    }
-
-                    else {
-                        operationsStack.push(currentRule);
-                    }
+                    
                 }
 
                 else if (currentRule.equals("+") || currentRule.equals("-")) {
@@ -53,7 +52,9 @@ public class infix_to_postfix {
                         operationsStack.push(currentRule);
                     }
                     else if (operationsStack.peek().equals("*") || operationsStack.peek().equals("/") || operationsStack.peek().equals("+") || operationsStack.peek().equals("-")) {
-                        expression.append(operationsStack.pop());
+                        while (!operationsStack.isEmpty() && !operationsStack.peek().equals("(")) {
+                            expression.append(operationsStack.pop());
+                        }
                         operationsStack.push(currentRule);
                     }
 
