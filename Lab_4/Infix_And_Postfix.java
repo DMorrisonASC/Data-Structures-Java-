@@ -56,7 +56,12 @@ public class Infix_And_Postfix<T> implements StackInterface<T> {
     }
 
     public T peek() {
-        return head.next.value();
+        if (isEmpty()) {
+            return null;
+        }
+        else {
+            return head.value();
+        }
     }
 
     public boolean isEmpty() {
