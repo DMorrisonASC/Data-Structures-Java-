@@ -1,4 +1,3 @@
-
 /*
     Author: Daeshaun Morrison, Muhlenberg College class of 2024(daeshaunkmorrison@gmail.com)
     Date:
@@ -36,9 +35,6 @@ public class postfix_to_infix {
                 operationsStack.push(x);
             }
         }
-
         return operationsStack.pop();
     }
-
-
 }
