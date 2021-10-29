@@ -1,5 +1,11 @@
 import java.util.Scanner;
-
+/*
+    Author: Daeshaun Morrison, Muhlenberg College class of 2024(daeshaunkmorrison@gmail.com)
+    Date:
+    Instructor: Professor Silveyra
+    Description: Develop and Implement a Program in Java for converting an Infix Expression to a Postfix Expression
+    and vice versa.
+ */
 public class Menu {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
@@ -20,13 +26,20 @@ public class Menu {
 
             switch (input) {
                 case "1":
-                    System.out.println("Loading...");
                     infix_to_postfix stack = new infix_to_postfix();
-                    output = stack.conversion("+*");
+                    System.out.println("Input your expression: ");
+                    output = stack.conversion(userExpression.nextLine().trim());
+
+                    System.out.println("Loading...");
                     System.out.println("The output is: " + output);
                     break;
                 case "2":
-                    System.out.println("Yes");
+                    postfix_to_infix stack2 = new postfix_to_infix();
+                    System.out.println("Input your expression: ");
+                    output = stack2.conversion(userExpression.nextLine().trim());
+
+                    System.out.println("Loading...");
+                    System.out.println("The output is: " + output);
                     break;
                 case "3":
                     System.out.println("Exiting...");
@@ -34,28 +47,7 @@ public class Menu {
                     break;
                 default:
                     System.out.println("Use a number from 1-3 to selection an option or exit");
-
             }
         }
-    }
-
-//    public static String infix_to_postfix(String expression) {
-//        String output = "";
-//        Infix_And_Postfix<String> operationsStack = new Infix_And_Postfix<String>();
-////        for (int i = 0; i < expression.length(); i++) {
-////            expressionStack
-////        }
-////        for (char element: expression.toCharArray()) {
-////            operationsStack.push(Character.toString(element));
-////        }
-//            operationsStack.push("A");
-//            operationsStack.outPut();
-//
-//        return output;
-//    }
-
-    public String postfix_to_infix(String expression) {
-
-        return "No";
     }
 }
