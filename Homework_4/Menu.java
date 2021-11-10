@@ -15,32 +15,61 @@ public class Menu {
 
         boolean keepGoing = true;
         while (keepGoing) {
-            System.out.println("1.\tConvert infix to postfix");
-            System.out.println("2.\tConvert postfix to infix");
-            System.out.println("3.\tExit");
-            System.out.println();
+            System.out.println("1.\tInsert an element");
+            System.out.println("2.\tInsert ten elements");
+            System.out.println("3.\tDelete an element");
+            System.out.println("4.\tFind an element");
+            System.out.println("5.\tPrint preorder, inorder, and postorder visualization of the Tree");
+            System.out.println("6.\tExit");
 
-            String input = scan.next();
+            String choice = scan.next();
 
             Scanner userExpression = new Scanner(System.in);
 
-            switch (input) {
+            switch (choice) {
                 case "1":
-                    tree.insert(20);
-                    tree.insert(10);
-                    tree.insert(15);
-                    tree.delete(15);
-                    tree.inorder();
+//                    System.out.println("1) Insert one element\n2) Randomly populates your tree with 10 elements");
+
+
+//                    tree.insert(11);
+//                    tree.insert(10);
+//                    tree.insert(15);
+//                    tree.insert(1);
+//                    tree.insert(77);
+//                    tree.insert(9);
+
+
                     break;
-                case "2":
+                    case "2":
+//                    System.out.println("1) Insert one element\n2) Randomly populates your tree with 10 elements");
+
+
+//                    tree.insert(11);
+//                    tree.insert(10);
+//                    tree.insert(15);
+//                    tree.insert(1);
+//                    tree.insert(77);
+//                    tree.insert(9);
+
 
                     break;
                 case "3":
+                    System.out.println("What element to delete?");
+                    int userInput = userExpression.nextInt();
+                    tree.delete(userInput);
+                    break;
+                case "4":
+                    tree.findNode(20);
+                    break;
+                case "5":
+                    tree.printAllOrders();
+                    break;
+                case "6":
                     System.out.println("Exiting...");
                     keepGoing = false;
                     break;
                 default:
-                    System.out.println("Use a number from 1-3 to selection an option or exit");
+                    System.out.println("Use a number from 1-5 to selection an option or exit");
             }
         }
     }
