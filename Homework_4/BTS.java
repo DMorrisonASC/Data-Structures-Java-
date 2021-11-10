@@ -46,8 +46,24 @@ public class BTS{
     return x;
   }
 
-  public void findNode() {
+  public void findNode(int value) {
+    root = findNode_recur(root, value);
+  }
 
+  private Node findNode_recur(Node node, int value) {
+    if (node == null) {
+      return null;
+    }
+    if (value < node.value) {
+      node.left = findNode_recur(node.left, value);
+    }
+    else if (value > node.value) {
+      node.right = findNode_recur(node.right, value);
+    }
+    else {
+      System.out.println("There is a node value of \"" + node.value + "\" present in the tree.");
+    }
+    return node;
 
   }
 
@@ -55,7 +71,7 @@ public class BTS{
     root = deleteNode_recur(root, value);
   }
 
-  public Node deleteNode_recur(Node node, int value) {
+  private Node deleteNode_recur(Node node, int value) {
     if (node == null) {
       return null;
     }
@@ -102,6 +118,17 @@ public class BTS{
     }
   }
 
+  public void preorder(){
+    preorderRecursive(root);
+  }
+
+  public void preorderRecursive(Node x){
+    if(x == null){return;}
+    System.out.println(x.value);
+    preorderRecursive(x.left);
+    preorderRecursive(x.right);
+  }
+
   public void inorder(){
     inorderRecursive(root);
   }
@@ -111,6 +138,26 @@ public class BTS{
     inorderRecursive(x.left);
     System.out.println(x.value);
     inorderRecursive(x.right);
+  }
+
+  public void postorder(){
+    postorderRecursive(root);
+  }
+
+  public void postorderRecursive(Node x){
+    if(x == null){return;}
+    postorderRecursive(x.left);
+    postorderRecursive(x.right);
+    System.out.println(x.value);
+  }
+
+  public void printAllOrders() {
+    System.out.println("Pre-order:");
+    preorder();
+    System.out.println("In-order:");
+    inorder();
+    System.out.println("Post-order:");
+    postorder();
   }
 
 
