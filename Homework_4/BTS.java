@@ -9,7 +9,7 @@
 
 import java.util.Random;
 
-// The following code is the modified version of code provided by
+// The following code is the heavily modified version of code provided by
 public class BTS<T>{
 
   public class Node {
@@ -30,27 +30,20 @@ public class BTS<T>{
     root = null;
   }
 
-//  public void insert_One(int input){
-//    root = insertRecursive(root, input);
-//  }
-//
-//  private Node insertRecursive(Node x, int input){
-//    if(x == null){
-//      x = new Node(input);
-//    }
-//    else if(x.value > input){
-//      x.left = insertRecursive(x.left,input);
-//    }
-//    else if(x.value < input){
-//      x.right = insertRecursive(x.right,input);
-//    }
-//
-//    return x;
-//  }
+  /**
+   * A generic function that calls it recursive version called `insertRecursive()`
+   * @param  input the a generic value given that determines what to insert(int or double or char)
+   * @return void
+   */
   public void insert_One(T input){
   root = insertRecursive(root, input);
 }
-
+  /**
+   * A generic function that inserts primitive of int or double or char depending on type declared. It
+   * @param  input the a generic value given that determines what to insert(int or double or char)
+   * @param  x the a generic value given that determines what to insert(int or double or char)
+   * @return The root of the tree, it has access to every node.
+   */
   private Node insertRecursive(Node x, T input){
     int inputNum;
     double intDouble;
@@ -58,7 +51,6 @@ public class BTS<T>{
 //    If it's an interger or double
     if (compareTo(input) == 0) {
       inputNum = Integer.parseInt(input.toString());
-//      double currentNum = Integer.parseInt(x.value.toString());
       if(x == null){
         x = new Node(input);
       }
@@ -101,11 +93,20 @@ public class BTS<T>{
     }
   }
 
-
+  /**
+   * A generic function that calls it recursive version called `findNode_recur()`
+   * @param  input the a generic value given that determines what to find(int or double or char)
+   * @return Void
+   */
   public void findNode(T input) {
     root = findNode_recur(root, input);
   }
-
+  /**
+   * A generic function that finds primitive of int or double or char depending on type declared. It
+   * @param  input the a generic value given that determines what to find(int or double or char)
+   * @param  x param stores a node that allows function to call it self
+   * @return The root of the tree, it has access to every node. It also prints how many, if any, nodes of a requested value found.
+   */
   private Node findNode_recur(Node x, T input) {
     int inputNum;
     double intDouble;
@@ -158,11 +159,20 @@ public class BTS<T>{
       return x;
     }
   }
-
+  /**
+   * A generic function that calls it recursive version called `deleteNode_recur()`
+   * @param  value A generic value given that determines what to delete (int or double or char).
+   * @return Void
+   */
   public void delete(T value) {
     root = deleteNode_recur(root, value);
   }
-
+  /**
+   * A generic function that deletes primitive of int or double or char depending on type declared. It
+   * @param  node param stores a node that allows function to call it self
+   * @param  value the a generic value given that determines what to delete(int or double or char)
+   * @return The root of the tree, it has access to every node. It also prints how many, if any, nodes of a requested value found.
+   */
   private Node deleteNode_recur(Node node, T value) {
     int inputInt;
     double inputDouble;
@@ -318,10 +328,11 @@ public class BTS<T>{
 
   public int compareTo(T a) {
     String temp1 = a.toString();
-
+//    Return "0" if it's an integer
     if (temp1.matches("-?(0|[1-9][0-9]*)")) {
         return 0;
     }
+//    Return "2" if it's a double
     else if (temp1.matches("[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?")){
       return 2;
     }
