@@ -53,6 +53,7 @@ public class BTS<T>{
 
   private Node insertRecursive(Node x, T input){
     int inputNum;
+    double intDouble;
     char inputChar;
 //    If it's an interger or double
     if (compareTo(input) == 0) {
@@ -65,6 +66,20 @@ public class BTS<T>{
         x.left = insertRecursive(x.left,input);
       }
       else if(Integer.parseInt(x.value.toString()) < inputNum){
+        x.right = insertRecursive(x.right,input);
+      }
+      return x;
+    }
+
+    else if (compareTo(input) == 2) {
+      intDouble = Double.parseDouble(input.toString());
+      if(x == null){
+        x = new Node(input);
+      }
+      else if(Double.parseDouble(x.value.toString()) > intDouble){
+        x.left = insertRecursive(x.left,input);
+      }
+      else if(Double.parseDouble(x.value.toString()) < intDouble){
         x.right = insertRecursive(x.right,input);
       }
       return x;
@@ -85,71 +100,89 @@ public class BTS<T>{
       return x;
     }
   }
-  
-/*
-  public void findNode(int value) {
-    root = findNode_recur(root, value);
+
+
+  public void findNode(T input) {
+    root = findNode_recur(root, input);
   }
 
-  private Node findNode_recur(Node node, int value) {
-    if (node == null) {
-      return null;
+  private Node findNode_recur(Node node, T input) {
+    int inputNum;
+    char inputChar;
+    if (compareTo(input) == 0) {
+      inputNum = Integer.parseInt(input.toString());
+      if (node == null) {
+        return null;
+      }
+      if (node.value.toString().charAt(0) < inputNum) {
+        node.left = findNode_recur(node.left, input);
+      } else if (node.value.toString().charAt(0) > inputNum) {
+        node.right = findNode_recur(node.right, input);
+      } else {
+        System.out.println("There is a node value of \"" + node.value + "\" present in the tree.");
+      }
+      return node;
     }
-    if (value < node.value) {
-      node.left = findNode_recur(node.left, value);
-    }
-    else if (value > node.value) {
-      node.right = findNode_recur(node.right, value);
-    }
+
     else {
-      System.out.println("There is a node value of \"" + node.value + "\" present in the tree.");
+      inputChar = input.toString().charAt(0);
+      if (node == null) {
+        return null;
+      }
+      if (Integer.parseInt(node.value.toString()) < inputChar) {
+        node.left = findNode_recur(node.left, input);
+      } else if (Integer.parseInt(node.value.toString()) > inputChar) {
+        node.right = findNode_recur(node.right, input);
+      } else {
+        System.out.println("There is a node value of \"" + node.value + "\" present in the tree.");
+      }
+      return node;
     }
-    return node;
 
   }
 
-  public void delete(int value) {
-    root = deleteNode_recur(root, value);
-  }
+//  public void delete(int value) {
+//    root = deleteNode_recur(root, value);
+//  }
 
-  private Node deleteNode_recur(Node node, int value) {
-    if (node == null) {
-      return null;
-    }
-    if (value < node.value) {
-      node.left = deleteNode_recur(node.left, value);
-    }
-    else if (value > node.value) {
-      node.right = deleteNode_recur(node.right, value);
-    }
-    else {
-      if (node.left == null && node.right == null) {
-        System.out.println("case");
-        node = null;
-      }
-      else if (node.left == null) {
-        System.out.println("case");
-        node = node.right;
-      }
-      else if (node.right == null) {
-        System.out.println("case");
-        node = node.left;
-      }
-
-      else {
-        System.out.println("case");
-        Node successor = findSuccessor_recur(node.right);
+//  private Node deleteNode_recur(Node node, int value) {
+//    if (node == null) {
+//      return null;
+//    }
+//    if (value < node.value) {
+//      node.left = deleteNode_recur(node.left, value);
+//    }
+//    else if (value > node.value) {
+//      node.right = deleteNode_recur(node.right, value);
+//    }
+//    else {
+//      if (node.left == null && node.right == null) {
+//        System.out.println("case");
+//        node = null;
+//      }
+//      else if (node.left == null) {
+//        System.out.println("case");
+//        node = node.right;
+//      }
+//      else if (node.right == null) {
+//        System.out.println("case");
+//        node = node.left;
+//      }
 //
-        node.value = successor.value;
+//      else {
+//        System.out.println("case");
+//        Node successor = findSuccessor_recur(node.right);
+////
+//        node.value = successor.value;
+////
+//        node.right = deleteNode_recur(node.right, successor.value);
 //
-        node.right = deleteNode_recur(node.right, successor.value);
+//      }
+//
+//    }
+//    return node;
+//  }
 
-      }
-
-    }
-    return node;
-  }
-*/
   private Node findSuccessor_recur(Node node) {
     if (node.left == null) {
       return node;
@@ -207,7 +240,11 @@ public class BTS<T>{
 
     if (temp1.matches("-?(0|[1-9][0-9]*)")) {
         return 0;
-    } else {
+    }
+    else if (temp1.matches("[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?")){
+      return 2;
+    }
+    else {
 //    Return "1" if it's a string
       return 1;
     }
