@@ -106,39 +106,56 @@ public class BTS<T>{
     root = findNode_recur(root, input);
   }
 
-  private Node findNode_recur(Node node, T input) {
+  private Node findNode_recur(Node x, T input) {
     int inputNum;
+    double intDouble;
     char inputChar;
     if (compareTo(input) == 0) {
       inputNum = Integer.parseInt(input.toString());
-      if (node == null) {
+      if (x == null) {
+        System.out.println("There is NO node value of \"" + x.value + "\" present in the tree.");
         return null;
       }
-      if (node.value.toString().charAt(0) < inputNum) {
-        node.left = findNode_recur(node.left, input);
-      } else if (node.value.toString().charAt(0) > inputNum) {
-        node.right = findNode_recur(node.right, input);
+      if (Integer.parseInt(x.value.toString()) < inputNum) {
+        x.left = findNode_recur(x.left, input);
+      } else if (Integer.parseInt(x.value.toString()) > inputNum) {
+        x.right = findNode_recur(x.right, input);
       } else {
-        System.out.println("There is a node value of \"" + node.value + "\" present in the tree.");
+        System.out.println("There is a node value of \"" + x.value + "\" present in the tree.");
       }
-      return node;
+      return x;
+    }
+
+    else if (compareTo(input) == 2) {
+      intDouble = Double.parseDouble(input.toString());
+      if (x == null) {
+        System.out.println("There is NO node value of \"" + x.value + "\" present in the tree.");
+        return null;
+      }
+      if (Double.parseDouble(x.value.toString()) < intDouble) {
+        x.left = findNode_recur(x.left, input);
+      } else if (Double.parseDouble(x.value.toString()) > intDouble) {
+        x.right = findNode_recur(x.right, input);
+      } else {
+        System.out.println("There is a node value of \"" + x.value + "\" present in the tree.");
+      }
+      return x;
     }
 
     else {
       inputChar = input.toString().charAt(0);
-      if (node == null) {
+      if (x == null) {
         return null;
       }
-      if (Integer.parseInt(node.value.toString()) < inputChar) {
-        node.left = findNode_recur(node.left, input);
-      } else if (Integer.parseInt(node.value.toString()) > inputChar) {
-        node.right = findNode_recur(node.right, input);
+      if (Integer.parseInt(x.value.toString()) < inputChar) {
+        x.left = findNode_recur(x.left, input);
+      } else if (Integer.parseInt(x.value.toString()) > inputChar) {
+        x.right = findNode_recur(x.right, input);
       } else {
-        System.out.println("There is a node value of \"" + node.value + "\" present in the tree.");
+        System.out.println("There is a node value of \"" + x.value + "\" present in the tree.");
       }
-      return node;
+      return x;
     }
-
   }
 
 //  public void delete(int value) {
