@@ -145,11 +145,12 @@ public class BTS<T>{
     else {
       inputChar = input.toString().charAt(0);
       if (x == null) {
+        System.out.println("There is NO node value of \"" + x.value + "\" present in the tree.");
         return null;
       }
-      if (Integer.parseInt(x.value.toString()) < inputChar) {
+      if (x.value.toString().charAt(0) < inputChar) {
         x.left = findNode_recur(x.left, input);
-      } else if (Integer.parseInt(x.value.toString()) > inputChar) {
+      } else if (x.value.toString().charAt(0) > inputChar) {
         x.right = findNode_recur(x.right, input);
       } else {
         System.out.println("There is a node value of \"" + x.value + "\" present in the tree.");
@@ -158,47 +159,47 @@ public class BTS<T>{
     }
   }
 
-//  public void delete(int value) {
-//    root = deleteNode_recur(root, value);
-//  }
+  public void delete(int value) {
+    root = deleteNode_recur(root, value);
+  }
 
-//  private Node deleteNode_recur(Node node, int value) {
-//    if (node == null) {
-//      return null;
-//    }
-//    if (value < node.value) {
-//      node.left = deleteNode_recur(node.left, value);
-//    }
-//    else if (value > node.value) {
-//      node.right = deleteNode_recur(node.right, value);
-//    }
-//    else {
-//      if (node.left == null && node.right == null) {
-//        System.out.println("case");
-//        node = null;
-//      }
-//      else if (node.left == null) {
-//        System.out.println("case");
-//        node = node.right;
-//      }
-//      else if (node.right == null) {
-//        System.out.println("case");
-//        node = node.left;
-//      }
+  private Node deleteNode_recur(Node node, int value) {
+    if (node == null) {
+      return null;
+    }
+    if (value < node.value) {
+      node.left = deleteNode_recur(node.left, value);
+    }
+    else if (value > node.value) {
+      node.right = deleteNode_recur(node.right, value);
+    }
+    else {
+      if (node.left == null && node.right == null) {
+        System.out.println("case");
+        node = null;
+      }
+      else if (node.left == null) {
+        System.out.println("case");
+        node = node.right;
+      }
+      else if (node.right == null) {
+        System.out.println("case");
+        node = node.left;
+      }
+
+      else {
+        System.out.println("case");
+        Node successor = findSuccessor_recur(node.right);
 //
-//      else {
-//        System.out.println("case");
-//        Node successor = findSuccessor_recur(node.right);
-////
-//        node.value = successor.value;
-////
-//        node.right = deleteNode_recur(node.right, successor.value);
+        node.value = successor.value;
 //
-//      }
-//
-//    }
-//    return node;
-//  }
+        node.right = deleteNode_recur(node.right, successor.value);
+
+      }
+
+    }
+    return node;
+  }
 
   private Node findSuccessor_recur(Node node) {
     if (node.left == null) {
