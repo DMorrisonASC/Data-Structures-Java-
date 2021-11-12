@@ -45,6 +45,8 @@ public class Menu {
                             break;
                         case "2":
                             System.out.println("Insert double:");
+                            double doubleInput = userExpression.nextDouble();
+                            treeDouble.insert_One(doubleInput);
                             break;
                         case "3":
                             System.out.println("Insert character:");
@@ -87,12 +89,31 @@ public class Menu {
                     }
                     break;
                 case "3":
-                    System.out.println("What element to delete?");
+                    System.out.println("What element to delete?:");
                     int userInput = userExpression.nextInt();
 //                    treeInt.delete(userInput);
                     break;
                 case "4":
-//                    treeInt.findNode(20);
+                    System.out.println("What element to find?: 1) Integers or 2)Doubles or 3) Character values?");
+                    String typeOfInput3 = keyboard.next();
+                    switch (typeOfInput3) {
+                        case "1":
+                            System.out.println("Enter integer: ");
+                            int intToFind = userExpression.nextInt();
+                            treeInt.findNode(intToFind);
+                            break;
+                        case "2":
+                            System.out.println("Enter double: ");
+                            double doubleToFind = userExpression.nextDouble();
+                            treeDouble.findNode(doubleToFind);
+                            break;
+                        case "3":
+                            System.out.println("Enter character: ");
+                            char charToFind = userExpression.next().toUpperCase(Locale.ROOT).charAt(0);
+                            treeChar.findNode(charToFind);
+                            break;
+                    }
+
                     break;
                 case "5":
                     System.out.println("Integer Tree:");
