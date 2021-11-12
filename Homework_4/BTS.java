@@ -159,46 +159,109 @@ public class BTS<T>{
     }
   }
 
-  public void delete(int value) {
+  public void delete(T value) {
     root = deleteNode_recur(root, value);
   }
 
-  private Node deleteNode_recur(Node node, int value) {
-    if (node == null) {
-      return null;
+  private Node deleteNode_recur(Node node, T value) {
+    int inputInt;
+    double inputDouble;
+    char inputChar;
+    if (compareTo(value) == 0) {
+      inputInt = Integer.parseInt(value.toString());
+      if (node == null) {
+        System.out.println("There is NO such value in the tree");
+        return null;
+      }
+      if (inputInt < Integer.parseInt(node.value.toString())) {
+        node.left = deleteNode_recur(node.left, value);
+      } else if (inputInt > Integer.parseInt(node.value.toString())) {
+        node.right = deleteNode_recur(node.right, value);
+      } else {
+        if (node.left == null && node.right == null) {
+          System.out.println("It had no child elements");
+          node = null;
+        } else if (node.left == null) {
+          System.out.println("Switched places with right child");
+          node = node.right;
+        } else if (node.right == null) {
+          System.out.println("Switched places with left child");
+          node = node.left;
+        } else {
+          System.out.println("case");
+          Node successor = findSuccessor_recur(node.right);
+//
+          node.value = successor.value;
+//
+          node.right = deleteNode_recur(node.right, successor.value);
+
+        }
+      }
+      return node;
     }
-    if (value < node.value) {
-      node.left = deleteNode_recur(node.left, value);
-    }
-    else if (value > node.value) {
-      node.right = deleteNode_recur(node.right, value);
+    else if (compareTo(value) == 2) {
+      inputDouble = Double.parseDouble(value.toString());
+      if (node == null) {
+        System.out.println("There is NO such value in the tree");
+        return null;
+      }
+      if (inputDouble < Double.parseDouble(node.value.toString())) {
+        node.left = deleteNode_recur(node.left, value);
+      } else if (inputDouble > Double.parseDouble(node.value.toString())) {
+        node.right = deleteNode_recur(node.right, value);
+      } else {
+        if (node.left == null && node.right == null) {
+          System.out.println("It had no child elements");
+          node = null;
+        } else if (node.left == null) {
+          System.out.println("Switched places with right child");
+          node = node.right;
+        } else if (node.right == null) {
+          System.out.println("Switched places with left child");
+          node = node.left;
+        } else {
+          System.out.println("case");
+          Node successor = findSuccessor_recur(node.right);
+//
+          node.value = successor.value;
+//
+          node.right = deleteNode_recur(node.right, successor.value);
+        }
+      }
+      return node;
     }
     else {
-      if (node.left == null && node.right == null) {
-        System.out.println("case");
-        node = null;
+      inputChar = value.toString().charAt(0);
+      if (node == null) {
+        System.out.println("There is NO such value in the tree");
+        return null;
       }
-      else if (node.left == null) {
-        System.out.println("case");
-        node = node.right;
-      }
-      else if (node.right == null) {
-        System.out.println("case");
-        node = node.left;
-      }
-
-      else {
-        System.out.println("case");
-        Node successor = findSuccessor_recur(node.right);
+      if (inputChar < value.toString().charAt(0)) {
+        node.left = deleteNode_recur(node.left, value);
+      } else if (inputChar > value.toString().charAt(0)) {
+        node.right = deleteNode_recur(node.right, value);
+      } else {
+        if (node.left == null && node.right == null) {
+          System.out.println("It had no child elements");
+          node = null;
+        } else if (node.left == null) {
+          System.out.println("Switched places with right child");
+          node = node.right;
+        } else if (node.right == null) {
+          System.out.println("Switched places with left child");
+          node = node.left;
+        } else {
+          System.out.println("case");
+          Node successor = findSuccessor_recur(node.right);
 //
-        node.value = successor.value;
+          node.value = successor.value;
 //
-        node.right = deleteNode_recur(node.right, successor.value);
+          node.right = deleteNode_recur(node.right, successor.value);
 
+        }
       }
-
+      return node;
     }
-    return node;
   }
 
   private Node findSuccessor_recur(Node node) {
