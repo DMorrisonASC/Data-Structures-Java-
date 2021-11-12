@@ -7,15 +7,17 @@
     function swaps the left and the right children of every node.
  */
 
+import java.util.Random;
+
 // The following code is the modified version of code provided by
-public class BTS{
+public class BTS<T>{
 
   public class Node {
     Node right;
     Node left;
-    int value;
+    T value;
 
-    public Node(int abc){
+    public Node(T abc){
       right = null;
       left = null;
       value = abc;
@@ -28,24 +30,63 @@ public class BTS{
     root = null;
   }
 
-  public void insert(int input){
-    root = insertRecursive(root,input);
+//  public void insert_One(int input){
+//    root = insertRecursive(root, input);
+//  }
+//
+//  private Node insertRecursive(Node x, int input){
+//    if(x == null){
+//      x = new Node(input);
+//    }
+//    else if(x.value > input){
+//      x.left = insertRecursive(x.left,input);
+//    }
+//    else if(x.value < input){
+//      x.right = insertRecursive(x.right,input);
+//    }
+//
+//    return x;
+//  }
+  public void insert_One(T input){
+  root = insertRecursive(root, input);
+}
+
+  private Node insertRecursive(Node x, T input){
+    int inputNum;
+    char inputChar;
+//    If it's an interger or double
+    if (compareTo(input) == 0) {
+      inputNum = Integer.parseInt(input.toString());
+//      double currentNum = Integer.parseInt(x.value.toString());
+      if(x == null){
+        x = new Node(input);
+      }
+      else if(Integer.parseInt(x.value.toString()) > inputNum){
+        x.left = insertRecursive(x.left,input);
+      }
+      else if(Integer.parseInt(x.value.toString()) < inputNum){
+        x.right = insertRecursive(x.right,input);
+      }
+      return x;
+    }
+//    If it's a character
+    else {
+      inputChar = input.toString().charAt(0);
+
+      if(x == null){
+        x = new Node(input);
+      }
+      else if(x.value.toString().charAt(0) > inputChar){
+        x.left = insertRecursive(x.left, input);
+      }
+      else if(x.value.toString().charAt(0) < inputChar){
+        x.right = insertRecursive(x.right, input);
+      }
+      return x;
+    }
   }
-
-  private Node insertRecursive(Node x, int input){
-    if(x == null){
-      x = new Node(input);
-    }
-    else if(x.value > input){
-      x.left = insertRecursive(x.left,input);
-    }
-    else if(x.value < input){
-      x.right = insertRecursive(x.right,input);
-    }
-
-    return x;
-  }
-
+  
+/*
   public void findNode(int value) {
     root = findNode_recur(root, value);
   }
@@ -108,7 +149,7 @@ public class BTS{
     }
     return node;
   }
-
+*/
   private Node findSuccessor_recur(Node node) {
     if (node.left == null) {
       return node;
@@ -124,6 +165,7 @@ public class BTS{
 
   public void preorderRecursive(Node x){
     if(x == null){return;}
+//    String symbol = String.valueOf(x.value);
     System.out.println(x.value);
     preorderRecursive(x.left);
     preorderRecursive(x.right);
@@ -160,5 +202,14 @@ public class BTS{
     postorder();
   }
 
+  public int compareTo(T a) {
+    String temp1 = a.toString();
 
+    if (temp1.matches("-?(0|[1-9][0-9]*)")) {
+        return 0;
+    } else {
+//    Return "1" if it's a string
+      return 1;
+    }
+  }
 }
