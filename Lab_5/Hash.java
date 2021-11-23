@@ -1,3 +1,12 @@
+/*
+    Author: Daeshaun Morrison, Muhlenberg College class of 2024(daeshaunkmorrison@gmail.com)
+    Date: 11/18/2021
+    Instructor: Professor
+    Description: Program 1:
+    Design, Develop and Implement a Program in Java for an open hash table. The program should
+    support the functions search, insert, display, and remove.
+    Errors: None
+ */
 import java.util.ArrayList;
 
 public class Hash<T> {
@@ -23,23 +32,26 @@ public class Hash<T> {
 
         if (hashArray.get(index) == null) {
             hashArray.set(index, oneNode);
-            System.out.println(oneNode.key + " & " + oneNode.data); // Check if it's there
+            System.out.println("1st:" + oneNode.key + " & " + oneNode.data); // Check if it's there
         }
         else {
             System.out.println("Ow");
             Node ptr = hashArray.get(index);     // A pointer to travel the list.
-            System.out.println(ptr.key + " & " + ptr.data); // Check if it's there
 
-            while (ptr.next != null)    // While not at the end of the list.
+            while (ptr != null)    // While not at the end of the list.
             {
+                if (ptr.key.equals(key)) {
+                    ptr.data = value;
+                    return;
+                }
+
+                if (ptr.next == null) {
+                    ptr.next = oneNode;
+                    oneNode.next = null;
+                    return;
+                }
                 ptr = ptr.next;         // Move to the next node.
-                System.out.println(ptr.key + " & " + ptr.data); // Check if it's there
             }
-
-            ptr.next = oneNode;
-            oneNode.next = null;
-
-            System.out.println(oneNode.key + " & " + oneNode.data); // Check if it's there
         }
     }
 
@@ -56,18 +68,74 @@ public class Hash<T> {
                 ptr = ptr.next;
             }
         }
-        System.out.println("Key does not exist!");
-
+        else {
+            System.out.println("Key does not exist!");
+        }
     }
 
+    public void delete (String key) {
+        int index = key.hashCode() % hashArray.size();
+        Node ptr = hashArray.get(index);     // A pointer to travel the list.
+
+//        if (hashArray.get(index) != null) {
+//            while (ptr != null) {
+//                if (hashArray.get(index).key.equals(key)) {
+////                    Check if 1st node is the only one in the list
+//                    if (hashArray.get(index).next != null) {
+//                        ptr.next = ptr.next.next;
+//
+//                        ptr.next.next = null;
+//                        System.out.println("delete1");
+//                        return;
+//                    } else {
+////                        hashArray.clear();
+//                        System.out.println("delete2");
+//
+//                    }
+//                }
+//                else {
+//                    if (ptr.next != null) {
+//                        if (ptr.next.key.equals(key)) {
+//                            ptr.next = ptr.next.next;
+//
+//                            ptr.next.next = null;
+////                        System.out.println(delet);
+//                            return;
+//                        }
+//                    }
+//                    ptr = ptr.next;
+//                }
+//            }
+//        }
+//        else {
+//            System.out.println("Key does not exist!");
+//        }
+        if (hashArray.get(index) == null) {
+            System.out.println("List is empty. Key does not exist!");
+        }
+
+        else {
+
+
+
+        }
+    }
     public static void main(String[] args) {
         Hash<String> hashtable = new Hash<String>(5);
 
+//        hashtable.insert("Dog", "Farts");
+//        hashtable.insert("Dog", "Poo");
+//        hashtable.insert("Dogs", "Boo");
+//        hashtable.insert("Dogs", "Pow");
+//        hashtable.insert("Dogt", "Pow");
+
         hashtable.insert("Dog", "Farts");
+//        hashtable.delete("Dog");
         hashtable.insert("Dog", "Poo");
-        hashtable.insert("Dog", "Boo");
-        hashtable.insert("Dog", "Pow");
-        hashtable.search("Cat");
+        hashtable.search("Dog");
+        hashtable.search("D");
+
+//        hashtable.search("Cat");
     }
 
     public class Node
