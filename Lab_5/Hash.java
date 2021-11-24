@@ -1,88 +1,89 @@
 /*
- *   A Linked List Class for implementing
- *   some simple recursive functions.
- *
- *   This program uses a singly linked list without sentinel.
- *   Also note that this is a generic class.
+    Author: Daeshaun Morrison, Muhlenberg College class of 2024(daeshaunkmorrison@gmail.com)
+    Date: 11/18/2021
+    Instructor: Professor
+    Description: Program 1:
+    Design, Develop and Implement a Program in Java for an open hash table. The program should
+    support the functions search, insert, display, and remove.
+    Errors: None
  */
-public class LinkedList <T>
-{
-    private Node header = null;  // Pointer to the head of the list.
+import java.util.ArrayList;
 
-    public LinkedList()
-    {
-        header = new Node();
-        header.key = "-99";
-        header.next = null;
+public class Hash<T> {
+    ArrayList<LinkedList<String>> hashArray;
+
+    public Hash(int size) {
+        hashArray = new ArrayList<>(size);
+
+        for (int i = 0; i < size; i++) {
+            LinkedList<String> oneLinkedList = new LinkedList<String>();
+            hashArray.add(oneLinkedList);
+        }
     }
-    /*
-     *   Enter a data item at the front of the list.
-     */
-    public void insert(String key, T value)
-    {
-        Node ptr = header;
 
-        Node oneNode = new Node();     // Construct a new node - ptr points to it.
+//    public void insert(String key, T value) {
+//        Node oneNode = new Node();
+//        oneNode.key = key;
+//        oneNode.data = value;
+//        int index = key.hashCode() % hashArray.size();
+//
+//        if (hashArray.get(index) == null) {
+//            hashArray.set(index, oneNode);
+//            System.out.println("1st:" + oneNode.key + " & " + oneNode.data); // Check if it's there
+//        }
+//        else {
+//            System.out.println("Ow");
+//            Node ptr = hashArray.get(index);     // A pointer to travel the list.
+//
+//            while (ptr != null)    // While not at the end of the list.
+//            {
+//                if (ptr.key.equals(key)) {
+//                    ptr.data = value;
+//                    return;
+//                }
+//
+//                if (ptr.next == null) {
+//                    ptr.next = oneNode;
+//                    oneNode.next = null;
+//                    return;
+//                }
+//                ptr = ptr.next;         // Move to the next node.
+//            }
+//        }
+//    }
 
-        oneNode.data = value;           // New node's data is the parameter item.
-        oneNode.key = key;
+        public void insert(String key, String value) {
+            int index = key.hashCode() % hashArray.size();
 
-        while (ptr.next != null) {
-            if (ptr.next.key.equals(key)) {
-                ptr.next.data = value;
-                return;
-            }
-            ptr = ptr.next;
+            LinkedList<String> selectedLinkedList = hashArray.get(index);
+
+            selectedLinkedList.insert(key, value);
+            selectedLinkedList.display();
         }
 
-        ptr.next = oneNode;
-        oneNode.next = null;
-    }
-    /*
-     *    lengthRecursive()
-     *
-     *    Return the length of the list that starts
-     *    at the Node pointed to by ptr.
-     */
-    public int lengthRecursive(Node ptr)
-    {
-        if (ptr != null) {
-            return lengthRecursive(ptr.next) + 1;
-        }
 
-        else return 0;
-    }
-    /*
-     *   Display the contents of the linked list.
-     */
-    public void display()
-    {
-        Node    ptr = header;  // Pointer to traverse the list.
-        ptr = ptr.next; // Move pointer from header because its data is null
-        System.out.print("Header -> ");
-
-        while (ptr != null) {    // While not at the end of the list ...
-            T data = ptr.data;              // Get data of current node.
-            String key = ptr.key;              // Get data of current node.
-            System.out.println(key + " " + data.toString()); // Print the data.
-            ptr = ptr.next;                 // Move to the next node.
-            System.out.print("->");
-        }
-        System.out.println();
+    public void search (String key) {
 
     }
 
-    public void search() {
+    public void delete (String key) {
 
     }
-    /*
-     *    Inner Class - Node objects for a singly linked list.
-     *
-     */
-    public class Node
-    {
-        public String key;
-        public T data;      // Data stored in the Node.
-        public Node next;   // Pointer to next Node in the list.
+
+    public static void main(String[] args) {
+        Hash<String> hashtable = new Hash<String>(5);
+
+        hashtable.insert("Dog", "Farts");
+        hashtable.insert("Dog", "Poo");
+        hashtable.insert("Dogh", "Poo");
+        hashtable.insert("Doh", "Poo");
     }
+
+//    public class Node
+//    {
+//        public String key;
+//        public T data;      // Data stored in the Node.
+//        public Node next;   // Pointer to next Node in the list.
+//    }
+
 }
