@@ -63,7 +63,11 @@ public class Hash<T> {
 
 
     public void search (String key) {
+        int index = key.hashCode() % hashArray.size();
 
+        LinkedList<String> selectedLinkedList = hashArray.get(index);
+
+        selectedLinkedList.search(key);
     }
 
     public void delete (String key) {
@@ -75,8 +79,9 @@ public class Hash<T> {
 
         hashtable.insert("Dog", "Farts");
         hashtable.insert("Dog", "Poo");
-        hashtable.insert("Dogh", "Poo");
-        hashtable.insert("Doh", "Poo");
+//        hashtable.insert("Dogh", "Poo");
+//        hashtable.insert("Doh", "Poo");
+        hashtable.search("Dog");
     }
 
 //    public class Node
