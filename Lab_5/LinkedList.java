@@ -87,7 +87,28 @@ public class LinkedList <T>
             System.out.println("Key does not exist!");
         }
         System.out.println("Key does not exist!");
+    }
 
+    public void delete(String key) {
+        Node ptr = header;
+
+        if (!key.equals("-99")) {
+            while (ptr.next != null) {
+                if (ptr.next.key.equals(key)) {
+                    Node nodeToRemove = ptr.next;
+
+                    ptr.next = nodeToRemove.next;
+
+                    nodeToRemove.next = null;
+
+                    return;
+                }
+                ptr = ptr.next;
+            }
+        } else {
+            System.out.println("Key does not exist!");
+        }
+        System.out.println("Key does not exist!");
     }
     /*
      *    Inner Class - Node objects for a singly linked list.
