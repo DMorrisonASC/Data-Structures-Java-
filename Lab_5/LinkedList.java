@@ -72,7 +72,21 @@ public class LinkedList <T>
 
     }
 
-    public void search() {
+    public void search(String key) {
+        Node ptr = header;
+
+        if (!key.equals("-99")) {
+            while (ptr != null) {
+                if (ptr.key.equals(key)) {
+                    System.out.println("Key: " + ptr.key + ", Value: " + ptr.data);
+                    return;
+                }
+                ptr = ptr.next;
+            }
+        } else {
+            System.out.println("Key does not exist!");
+        }
+        System.out.println("Key does not exist!");
 
     }
     /*
