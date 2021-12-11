@@ -1,62 +1,39 @@
-import java.util.ArrayList;
+
 
 public class Adjacency_List {
-    ArrayList<LinkedList<Integer>> hashArray;
+    LinkedList<Integer>[] adjList_Array;
+    int size;
 
     public Adjacency_List(int size) {
-        hashArray = new ArrayList<>(size);
-
+        this.size = size;
+        adjList_Array = new LinkedList[size];
         for (int i = 0; i < size; i++) {
-            LinkedList<String> oneLinkedList = new LinkedList<String>();
-            hashArray.add(oneLinkedList);
+            LinkedList<Integer> oneLinkedlist = new LinkedList<Integer>();
+            adjList_Array[i] = oneLinkedlist;
         }
     }
 
-    public void insert(String key, int value) {
-        int index = Integer.parseInt(key);
-
-        LinkedList<Integer> selectedLinkedList = hashArray.get(index);
-
-        selectedLinkedList.insert(key, value);
+    public void insert(int index, String to_node, int weight) {
+        LinkedList<Integer> selectedLinkedList = adjList_Array[index];
+        selectedLinkedList.insert(to_node, weight);
     }
 
-
-    public void search (String key) {
-        int index = key.hashCode() % hashArray.size();
-
-        LinkedList selectedLinkedList = hashArray.get(index);
-
-        selectedLinkedList.search(key);
-    }
-
-    public void delete (String key) {
-        int index = key.hashCode() % hashArray.size();
-
-        LinkedList<String> selectedLinkedList = hashArray.get(index);
-
-        selectedLinkedList.delete(key);
-    }
-
-    public void display () {
-
-        for (int i = 0; i < hashArray.size(); i++) {
-            LinkedList<String> selectedLinkedList = hashArray.get(i);
-            System.out.println("Index " + i + " Of Hashmap: ");
+    public void displayAllList() {
+        for (int i = 0; i < size; i++) {
+            LinkedList<Integer> selectedLinkedList = adjList_Array[i];
+            System.out.println("Node " + i + " Connections: ");
             selectedLinkedList.display();
         }
-
     }
 
     public static void main(String[] args) {
-        Adjacency_List hashtable = new Adjacency_List(5);
+        Adjacency_List myList = new Adjacency_List(5);
 
-        hashtable.insert("Dog", "Farts");
-        hashtable.insert("Dog", "Poo");
-//        hashtable.delete("Dog");
-////        hashtable.insert("Dogh", "Poo");
-////        hashtable.insert("Doh", "Poo");
-        hashtable.search("Dog");
-        hashtable.display();
+        myList.insert(1, "9", 5);
+        myList.insert(1, "2", 5);
+        myList.insert(1, "3", 5);
+
+        myList.displayAllList();
+
     }
-
 }
