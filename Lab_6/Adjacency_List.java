@@ -7,7 +7,6 @@
  */
 
 import java.util.ArrayList;
-import java.util.Queue;
 
 public class Adjacency_List {
     LinkedList<Integer>[] adjList_Array;
@@ -58,6 +57,7 @@ public class Adjacency_List {
         for (int i = 0; i < visitedNodes.size(); i++) {
             System.out.print(visitedNodes.get(i));
         }
+        System.out.println();
     }
 
     public void BFS () {
@@ -76,19 +76,14 @@ public class Adjacency_List {
                     ptr = ptr.next;
                     BFS_Queue.enqueue(Integer.parseInt(ptr.key));
                 }
-
-                for (int i = 0; i < visitedNodes.size(); i++) {
-                    System.out.print(visitedNodes.get(i));
-                }
-                System.out.println();
 //                Then remove it from queue
             }
             BFS_Queue.dequeue();
         }
 
-//        for (int i = 0; i < visitedNodes.size(); i++) {
-//            System.out.print(visitedNodes.get(i));
-//        }
+        for (int i = 0; i < visitedNodes.size(); i++) {
+            System.out.print(visitedNodes.get(i));
+        }
+        System.out.println();
     }
-
 }
