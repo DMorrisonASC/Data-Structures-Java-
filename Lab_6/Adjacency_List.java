@@ -1,4 +1,4 @@
-
+import java.util.ArrayList;
 
 public class Adjacency_List {
     LinkedList<Integer>[] adjList_Array;
@@ -26,14 +26,29 @@ public class Adjacency_List {
         }
     }
 
-    public static void main(String[] args) {
-        Adjacency_List myList = new Adjacency_List(5);
+    public void DFS () {
+        Stack<Integer> DFS_Stack = new Stack<Integer>();
+        ArrayList<Integer> visitedNodes = new ArrayList<>(size);
 
-        myList.insert(1, "9", 5);
-        myList.insert(1, "2", 5);
-        myList.insert(1, "3", 5);
+        DFS_Stack.push(0);
 
-        myList.displayAllList();
+        while (visitedNodes.size() != size){
+            int popNodeIndex = DFS_Stack.pop();
+                if (!visitedNodes.contains(popNodeIndex)) {
+                    visitedNodes.add(popNodeIndex);
+                    System.out.println(popNodeIndex);
+                    LinkedList<Integer>.Node ptr = adjList_Array[popNodeIndex].header;
+                    while (ptr.next != null) {
+                        ptr = ptr.next;
+                        DFS_Stack.push(Integer.parseInt(ptr.key));
+                    }
+                }
+        }
 
+        for (int i = 0; i < visitedNodes.size(); i++) {
+            System.out.print(visitedNodes.get(i));
+        }
     }
+    
+    
 }
