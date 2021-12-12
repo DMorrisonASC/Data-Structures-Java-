@@ -1,3 +1,11 @@
+/*
+    Author: Daeshaun Morrison, Muhlenberg College class of 2024(daeshaunkmorrison@gmail.com)
+    Date:
+    Instructor: Professor
+    Description: Implement of an adjacency list.
+    Errors:
+ */
+
 import java.util.ArrayList;
 
 public class Adjacency_List {
@@ -36,7 +44,6 @@ public class Adjacency_List {
             int popNodeIndex = DFS_Stack.pop();
                 if (!visitedNodes.contains(popNodeIndex)) {
                     visitedNodes.add(popNodeIndex);
-                    System.out.println(popNodeIndex);
                     LinkedList<Integer>.Node ptr = adjList_Array[popNodeIndex].header;
                     while (ptr.next != null) {
                         ptr = ptr.next;
@@ -49,6 +56,27 @@ public class Adjacency_List {
             System.out.print(visitedNodes.get(i));
         }
     }
-    
-    
+
+    public void BFS () {
+        MyQueue BFS_Queue = new MyQueue(size);
+        ArrayList<Integer> visitedNodes = new ArrayList<>(size);
+
+        BFS_Queue.enqueue(0);
+
+        while (visitedNodes.size() != size){
+            int popNodeIndex = BFS_Queue.dequeue();
+            if (!visitedNodes.contains(popNodeIndex)) {
+                visitedNodes.add(popNodeIndex);
+                LinkedList<Integer>.Node ptr = adjList_Array[popNodeIndex].header;
+                while (ptr.next != null) {
+                    ptr = ptr.next;
+                    BFS_Queue.enqueue(Integer.parseInt(ptr.key));
+                }
+            }
+        }
+
+        for (int i = 0; i < visitedNodes.size(); i++) {
+            System.out.print(visitedNodes.get(i));
+        }
+    }
 }
