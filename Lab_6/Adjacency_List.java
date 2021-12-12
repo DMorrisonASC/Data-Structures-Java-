@@ -7,13 +7,16 @@
  */
 
 import java.util.ArrayList;
+import java.util.Queue;
 
 public class Adjacency_List {
     LinkedList<Integer>[] adjList_Array;
     int size;
+    int edges;
 
-    public Adjacency_List(int size) {
+    public Adjacency_List(int size, int edges) {
         this.size = size;
+        this.edges = edges;
         adjList_Array = new LinkedList[size];
         for (int i = 0; i < size; i++) {
             LinkedList<Integer> oneLinkedlist = new LinkedList<Integer>();
@@ -58,25 +61,34 @@ public class Adjacency_List {
     }
 
     public void BFS () {
-        MyQueue BFS_Queue = new MyQueue(size);
+        MyQueue BFS_Queue = new MyQueue(100);
         ArrayList<Integer> visitedNodes = new ArrayList<>(size);
 
         BFS_Queue.enqueue(0);
 
         while (visitedNodes.size() != size){
-            int popNodeIndex = BFS_Queue.dequeue();
+            int popNodeIndex = BFS_Queue.peek();
             if (!visitedNodes.contains(popNodeIndex)) {
                 visitedNodes.add(popNodeIndex);
+//                Get all the keys of the nodes that the index is pointing to
                 LinkedList<Integer>.Node ptr = adjList_Array[popNodeIndex].header;
                 while (ptr.next != null) {
                     ptr = ptr.next;
                     BFS_Queue.enqueue(Integer.parseInt(ptr.key));
                 }
+
+                for (int i = 0; i < visitedNodes.size(); i++) {
+                    System.out.print(visitedNodes.get(i));
+                }
+                System.out.println();
+//                Then remove it from queue
             }
+            BFS_Queue.dequeue();
         }
 
-        for (int i = 0; i < visitedNodes.size(); i++) {
-            System.out.print(visitedNodes.get(i));
-        }
+//        for (int i = 0; i < visitedNodes.size(); i++) {
+//            System.out.print(visitedNodes.get(i));
+//        }
     }
+
 }
