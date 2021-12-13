@@ -6,12 +6,19 @@
     Errors:
  */
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Adjacency_List {
     LinkedList<Integer>[] adjList_Array;
     int size;
     int edges;
+
+    public Adjacency_List() {
+
+    }
 
     public Adjacency_List(int size, int edges) {
         this.size = size;
@@ -85,5 +92,40 @@ public class Adjacency_List {
             System.out.print(visitedNodes.get(i));
         }
         System.out.println();
+    }
+
+    public Adjacency_List load_List_File (String myList) throws IOException {
+        File fileName = new File(myList);
+        Scanner myFile = new Scanner(fileName);
+        Adjacency_List createdList;
+        int adjListSize;
+        int amountOfEdges;
+
+        // Scan in the 1st line in file that sets size of adjacency list and it's edges
+        String theFirstLine = myFile.nextLine();
+        Scanner theFirstLineScanner = new Scanner(theFirstLine);
+
+        adjListSize = Integer.parseInt(theFirstLineScanner.next());
+        amountOfEdges = Integer.parseInt(theFirstLineScanner.next());
+        createdList = new Adjacency_List(adjListSize, amountOfEdges);
+
+        /*
+         * Read and load in data from example graph
+         * */
+        while (myFile.hasNextLine()) {
+//            Scan in one line in file
+            String eachLine = myFile.nextLine();
+            Scanner scanNum = new Scanner(eachLine);
+//          Scan number
+            while (scanNum.hasNext()) {
+                int index = Integer.parseInt(scanNum.next());
+                String to_node_name = scanNum.next();
+                int weight = Integer.parseInt(scanNum.next());
+
+                createdList.insert(index, to_node_name, weight);
+            }
+        }
+//        myList.displayAllList();
+        return createdList;
     }
 }
