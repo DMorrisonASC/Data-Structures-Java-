@@ -4,19 +4,20 @@ import java.util.Scanner;
 
 public class Menu {
     public static void main(String[] args) throws IOException {
+        boolean keepGoing = true;
         File fileName = new File("./Example_Data.txt");
         Scanner myFile = new Scanner(fileName);
         Adjacency_List myList;
         int adjListSize;
-        String amountOfEdges;
+        int amountOfEdges;
 
         // Scan in the 1st line in file that sets size of adjacency list and it's edges
         String theFirstLine = myFile.nextLine();
         Scanner theFirstLineScanner = new Scanner(theFirstLine);
 
         adjListSize = Integer.parseInt(theFirstLineScanner.next());
-        amountOfEdges = theFirstLineScanner.next();
-        myList = new Adjacency_List(adjListSize);
+        amountOfEdges = Integer.parseInt(theFirstLineScanner.next());
+        myList = new Adjacency_List(adjListSize, amountOfEdges);
 
         /*
         * Read and load in data from example graph
@@ -34,6 +35,40 @@ public class Menu {
                 myList.insert(index, to_node_name, weight);
             }
         }
-        myList.displayAllList();
+//        myList.displayAllList();
+
+        Scanner keyboard = new Scanner(System.in);
+
+        while (keepGoing) {
+            System.out.println("1. Find the shortest path\n" +
+                    "2. DFS and BFS\n" +
+                    "3. Load new file\n" +
+                    "4. Exit\n");
+
+            String choice = keyboard.nextLine().trim();
+
+            switch (choice) {
+                case "1":
+                    System.out.println("Enter node: ");
+                    break;
+                case "2":
+                    System.out.print("DFS: ");
+                    myList.DFS();
+                    System.out.print("BFS: ");
+                    myList.BFS();
+                break;
+
+                case "3":
+
+                    break;
+                case "4":
+                    keepGoing = false;
+                break;
+
+            }
+
+        }
+
     }
+    
 }
