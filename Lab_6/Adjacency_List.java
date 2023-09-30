@@ -1,131 +1,109 @@
-/*
-    Author: Daeshaun Morrison, Muhlenberg College class of 2024(daeshaunkmorrison@gmail.com)
-    Date:
-    Instructor: Professor
-    Description: Implement of an adjacency list.
-    Errors:
- */
+# Author: Daeshaun Morrison, Muhlenberg College class of 2024(daeshaunkmorrison@gmail.com)
+# Date: 9/26/2023
+# Instructor: Professor Silveyra
+# Description: Students will implement a simple adjacency list
+# Errors: 1) Can NOT execute `DFS()` and `BFS()` are the same time 
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
+from Node import Node
+from Stack import Stack
+from Queue import MyQueue
+from LinkedList import LinkedList
+from Heap import MinHeap
+# from Stack import DFS
 
-public class Adjacency_List {
-    LinkedList<Integer>[] adjList_Array;
-    int size;
-    int edges;
+class AdjList:
+    def __init__(self, num):
+        self.V = num
+        self.graph = [None] * self.V
 
-    public Adjacency_List() {
+        for x in range(self.V):
+            self.graph[x] = LinkedList()
 
-    }
+    # Add edges
+    def insert(self, index, d):
+        selectedLinkedList = self.graph[index] 
+        selectedLinkedList.insertAtBegin(d)
 
-    public Adjacency_List(int size, int edges) {
-        this.size = size;
-        this.edges = edges;
-        adjList_Array = new LinkedList[size];
-        for (int i = 0; i < size; i++) {
-            LinkedList<Integer> oneLinkedlist = new LinkedList<Integer>();
-            adjList_Array[i] = oneLinkedlist;
-        }
-    }
 
-    public void insert(int index, String to_node, int weight) {
-        LinkedList<Integer> selectedLinkedList = adjList_Array[index];
-        selectedLinkedList.insert(to_node, weight);
-    }
+    # print a single  vertice
+    def print_Vertice(self, index):
+        selectedLinkedList = self.graph[index]
+        print("Vertex " + str(index) + ":", end="")
+        selectedLinkedList.printList()
 
-    public void displayAllList() {
-        for (int i = 0; i < size; i++) {
-            LinkedList<Integer> selectedLinkedList = adjList_Array[i];
-            System.out.println("Node " + i + " Connections: ");
-            selectedLinkedList.display();
-        }
-    }
 
-    public void DFS () {
-        Stack<Integer> DFS_Stack = new Stack<Integer>();
-        ArrayList<Integer> visitedNodes = new ArrayList<>(size);
+    # Print the graph
+    def print_graph(self):
+        for index in range(self.V):
+            selectedLinkedList = self.graph[index]
+            print("Vertex " + str(index) + ":", end="")
+            selectedLinkedList.printList()
+            print()
 
-        DFS_Stack.push(0);
+    def DFS(self, startP):
+        stack = Stack()
+        stack.push(startP)
+        visited = []
 
-        while (visitedNodes.size() != size){
-            int popNodeIndex = DFS_Stack.pop();
-                if (!visitedNodes.contains(popNodeIndex)) {
-                    visitedNodes.add(popNodeIndex);
-                    LinkedList<Integer>.Node ptr = adjList_Array[popNodeIndex].header;
-                    while (ptr.next != null) {
-                        ptr = ptr.next;
-                        DFS_Stack.push(Integer.parseInt(ptr.key));
-                    }
-                }
-        }
+        while stack.is_empty() == False:
+            eachV = stack.pop()
+    
+            if eachV not in visited:
+                visited.append(eachV)
+                current_node = self.graph[eachV].getHead()
 
-        for (int i = 0; i < visitedNodes.size(); i++) {
-            System.out.print(visitedNodes.get(i));
-        }
-        System.out.println();
-    }
+                while current_node:
+                    if current_node != None:
+                        stack.push(current_node.data)
+                        current_node = current_node.next
 
-    public void BFS () {
-        MyQueue BFS_Queue = new MyQueue(100);
-        ArrayList<Integer> visitedNodes = new ArrayList<>(size);
+        print("Path: ",end="")
+        for i in visited:
+            print(i, end=" -> ")
 
-        BFS_Queue.enqueue(0);
+    def BFS(self, startP):
+        queue = MyQueue(self.V)
+        queue.enque(startP)
+        visited = []
 
-        while (visitedNodes.size() != size){
-            int popNodeIndex = BFS_Queue.peek();
-            if (!visitedNodes.contains(popNodeIndex)) {
-                visitedNodes.add(popNodeIndex);
-//                Get all the keys of the nodes that the index is pointing to
-                LinkedList<Integer>.Node ptr = adjList_Array[popNodeIndex].header;
-                while (ptr.next != null) {
-                    ptr = ptr.next;
-                    BFS_Queue.enqueue(Integer.parseInt(ptr.key));
-                }
-//                Then remove it from queue
-            }
-            BFS_Queue.dequeue();
-        }
+        while queue.is_empty() == False:
+            eachV = queue.deque()
 
-        for (int i = 0; i < visitedNodes.size(); i++) {
-            System.out.print(visitedNodes.get(i));
-        }
-        System.out.println();
-    }
+            if eachV not in visited:
+                visited.append(eachV)
+                current_node = self.graph[eachV].getHead()
+                while current_node:
+                    queue.enque(current_node.data)
+                    current_node = current_node.next
 
-    public Adjacency_List load_List_File (String myList) throws IOException {
-        File fileName = new File(myList);
-        Scanner myFile = new Scanner(fileName);
-        Adjacency_List createdList;
-        int adjListSize;
-        int amountOfEdges;
+        print("Path: ",end="")
+        for i in visited:
+            print(i, end=" -> ")
 
-        // Scan in the 1st line in file that sets size of adjacency list and it's edges
-        String theFirstLine = myFile.nextLine();
-        Scanner theFirstLineScanner = new Scanner(theFirstLine);
+    def Dijkstras():
+        pass
 
-        adjListSize = Integer.parseInt(theFirstLineScanner.next());
-        amountOfEdges = Integer.parseInt(theFirstLineScanner.next());
-        createdList = new Adjacency_List(adjListSize, amountOfEdges);
+    def remove_connect(self, index, connection):
+        linkedL = self.graph[index]
+        print(type(linkedL))
+        linkedL.remove_node(int(connection))
 
-        /*
-         * Read and load in data from example graph
-         * */
-        while (myFile.hasNextLine()) {
-//            Scan in one line in file
-            String eachLine = myFile.nextLine();
-            Scanner scanNum = new Scanner(eachLine);
-//          Scan number
-            while (scanNum.hasNext()) {
-                int index = Integer.parseInt(scanNum.next());
-                String to_node_name = scanNum.next();
-                int weight = Integer.parseInt(scanNum.next());
+    
 
-                createdList.insert(index, to_node_name, weight);
-            }
-        }
-//        myList.displayAllList();
-        return createdList;
-    }
-}
+if __name__ == "__main__":
+    V = 5
+
+    # Create graph and edges
+    Adjacency_List = AdjList(V)
+    Adjacency_List.insert(0, 1)
+    Adjacency_List.insert(0, 2)
+    Adjacency_List.insert(1, 0)    
+    Adjacency_List.insert(1, 1)
+    Adjacency_List.print_graph()
+    # Adjacency_List.print_Vertice(0)
+
+    # Adjacency_List.remove_connect(0,2)
+    # Adjacency_List.print_graph()
+
+    DFS_results = Adjacency_List.DFS(0)
+    BFS_results = Adjacency_List.BFS(0)
